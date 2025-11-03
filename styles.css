@@ -2042,7 +2042,7 @@ body {
 /* Promotional Advertisement Section */
 .promo-ad-section {
     background: linear-gradient(135deg, #FF6B35 0%, #FF8C61 50%, #FFB088 100%);
-    padding: 2.5rem 0;
+    padding: 1.5rem 0;
     position: relative;
     overflow: hidden;
 }
@@ -2076,7 +2076,7 @@ body {
     padding: 0 2rem;
     display: grid;
     grid-template-columns: 1fr 1.2fr;
-    gap: 3rem;
+    gap: 2rem;
     align-items: center;
     position: relative;
     z-index: 1;
@@ -2085,7 +2085,7 @@ body {
 /* Carousel Side */
 .promo-carousel {
     position: relative;
-    height: 280px;
+    height: 220px;
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
@@ -2218,18 +2218,18 @@ body {
 }
 
 .promo-title {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: 700;
     line-height: 1.2;
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.6rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .promo-highlight {
     display: block;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     color: #FFE55C;
-    margin-top: 0.3rem;
+    margin-top: 0.2rem;
     animation: glow 2s ease-in-out infinite;
 }
 
@@ -2243,18 +2243,18 @@ body {
 }
 
 .promo-description {
-    font-size: 0.85rem;
-    line-height: 1.6;
-    margin-bottom: 1rem;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    margin-bottom: 0.8rem;
     opacity: 0.95;
     font-weight: 300;
 }
 
 .promo-benefits {
     display: flex;
-    gap: 0.8rem;
+    gap: 0.6rem;
     flex-wrap: wrap;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .benefit-tag {
@@ -2279,9 +2279,9 @@ body {
     gap: 0.5rem;
     background: var(--white);
     color: var(--primary-orange);
-    padding: 0.9rem 2rem;
+    padding: 0.7rem 1.6rem;
     border-radius: 30px;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 600;
     text-decoration: none;
     text-transform: uppercase;
@@ -2319,17 +2319,17 @@ body {
 /* Tablet Responsive */
 @media (max-width: 968px) {
     .promo-ad-section {
-        padding: 2rem 0;
+        padding: 1.5rem 0;
     }
     
     .promo-ad-container {
         grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: 1.5rem;
         padding: 0 1.5rem;
     }
     
     .promo-carousel {
-        height: 240px;
+        height: 200px;
     }
     
     .promo-content {
@@ -2337,11 +2337,11 @@ body {
     }
     
     .promo-title {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
     
     .promo-highlight {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
     
     .promo-benefits {
@@ -2352,16 +2352,16 @@ body {
 /* Mobile Responsive */
 @media (max-width: 480px) {
     .promo-ad-section {
-        padding: 1.5rem 0;
+        padding: 1.2rem 0;
     }
     
     .promo-ad-container {
-        gap: 1.5rem;
+        gap: 1.2rem;
         padding: 0 1rem;
     }
     
     .promo-carousel {
-        height: 200px;
+        height: 180px;
         border-radius: 15px;
     }
     
@@ -2382,16 +2382,16 @@ body {
     }
     
     .promo-title {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
     }
     
     .promo-highlight {
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
     
     .promo-description {
-        font-size: 0.8rem;
-        margin-bottom: 0.8rem;
+        font-size: 0.75rem;
+        margin-bottom: 0.6rem;
     }
     
     .promo-benefits {
@@ -2404,7 +2404,7 @@ body {
     }
     
     .btn-promo-book {
-        padding: 0.8rem 1.5rem;
+        padding: 0.7rem 1.3rem;
         font-size: 0.75rem;
     }
 }
@@ -2412,7 +2412,7 @@ body {
 /* Very Small Screens */
 @media (max-width: 360px) {
     .promo-carousel {
-        height: 180px;
+        height: 160px;
     }
     
     .promo-title {
@@ -2420,11 +2420,11 @@ body {
     }
     
     .promo-highlight {
-        font-size: 1rem;
+        font-size: 0.95rem;
     }
     
     .promo-description {
-        font-size: 0.75rem;
+        font-size: 0.7rem;
     }
 }
 
