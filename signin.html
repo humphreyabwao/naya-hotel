@@ -961,6 +961,151 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* Enquiry Module Styles */
+        .stats-summary {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .stat-summary-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: white;
+            padding: 12px 16px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            min-width: 80px;
+        }
+
+        .stat-summary-item .stat-number {
+            font-size: 24px;
+            font-weight: 700;
+            color: #FF6B35;
+            line-height: 1;
+        }
+
+        .stat-summary-item .stat-text {
+            font-size: 11px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 2px;
+        }
+
+        /* Enquiry Details Modal Styles */
+        .enquiry-details-content {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .detail-row.full-width {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .detail-row strong {
+            color: #333;
+            font-weight: 600;
+            min-width: 120px;
+        }
+
+        .detail-row span {
+            color: #666;
+            text-align: right;
+            word-break: break-word;
+        }
+
+        .detail-row.full-width strong {
+            margin-bottom: 8px;
+        }
+
+        .message-content {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+            border-left: 3px solid #FF6B35;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            line-height: 1.5;
+            color: #444;
+        }
+
+        .status-select {
+            padding: 6px 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: white;
+            color: #333;
+            font-size: 13px;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+            transform: translateY(-1px);
+        }
+
+        /* Enquiry Table Specific Styles */
+        .enquiry-message-preview {
+            max-width: 200px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .enquiry-message-preview:hover {
+            color: #FF6B35;
+            text-decoration: underline;
+        }
+
+        .enquiry-id {
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            background: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #666;
+        }
+
+        /* Status badges for enquiries */
+        .status-badge.new {
+            background: #28a745;
+            color: white;
+        }
+
+        .status-badge.in-progress {
+            background: #ffc107;
+            color: #212529;
+        }
+
+        .status-badge.resolved {
+            background: #6c757d;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -1270,6 +1415,63 @@
                     </table>
                 </div>
             </div>
+
+            <!-- Enquiries Module -->
+            <div id="enquiriesModule" style="display: none;">
+                <div class="module-header">
+                    <div class="search-filter-container">
+                        <div class="search-box">
+                            <input type="text" id="enquirySearch" placeholder="Search enquiries...">
+                            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                            </svg>
+                        </div>
+                        <select id="enquiryFilter" class="filter-select">
+                            <option value="all">All Status</option>
+                            <option value="new">New</option>
+                            <option value="in-progress">In Progress</option>
+                            <option value="resolved">Resolved</option>
+                        </select>
+                    </div>
+                    <div class="stats-summary">
+                        <div class="stat-summary-item">
+                            <span class="stat-number" id="totalEnquiries">0</span>
+                            <span class="stat-text">Total</span>
+                        </div>
+                        <div class="stat-summary-item">
+                            <span class="stat-number" id="newEnquiries">0</span>
+                            <span class="stat-text">New</span>
+                        </div>
+                        <div class="stat-summary-item">
+                            <span class="stat-number" id="pendingEnquiries">0</span>
+                            <span class="stat-text">Pending</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table class="customer-table">
+                        <thead>
+                            <tr>
+                                <th>Enquiry ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Subject</th>
+                                <th>Message</th>
+                                <th>Status</th>
+                                <th>Submitted</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="enquiriesTableBody">
+                            <tr>
+                                <td colspan="9" class="no-data">No enquiries found</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -1375,6 +1577,65 @@
                     <button type="submit" class="btn-submit">Create Booking</button>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <!-- Enquiry Details Modal -->
+    <div class="modal-overlay" id="enquiryDetailsModal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h2 class="modal-title">Enquiry Details</h2>
+                <button class="modal-close" id="closeEnquiryModal">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="enquiry-details-content">
+                    <div class="detail-row">
+                        <strong>Enquiry ID:</strong>
+                        <span id="detailEnquiryId">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <strong>Name:</strong>
+                        <span id="detailName">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <strong>Email:</strong>
+                        <span id="detailEmail">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <strong>Phone:</strong>
+                        <span id="detailPhone">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <strong>Subject:</strong>
+                        <span id="detailSubject">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <strong>Submitted:</strong>
+                        <span id="detailSubmitted">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <strong>Status:</strong>
+                        <select id="detailStatus" class="status-select">
+                            <option value="new">New</option>
+                            <option value="in-progress">In Progress</option>
+                            <option value="resolved">Resolved</option>
+                        </select>
+                    </div>
+                    <div class="detail-row full-width">
+                        <strong>Message:</strong>
+                        <div class="message-content" id="detailMessage">-</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-cancel" id="cancelEnquiryModal">Close</button>
+                <button type="button" class="btn-submit" id="updateEnquiryStatus">Update Status</button>
+                <button type="button" class="btn-danger" id="deleteEnquiry">Delete</button>
+            </div>
         </div>
     </div>
 
@@ -1738,6 +1999,229 @@
             }
         });
 
+        // ===== ENQUIRIES MANAGEMENT =====
+        
+        // Real-time enquiries data listener
+        function loadEnquiries() {
+            const enquiriesRef = ref(database, 'contact-enquiries');
+            onValue(enquiriesRef, (snapshot) => {
+                const tableBody = document.getElementById('enquiriesTableBody');
+                const totalEnquiries = document.getElementById('totalEnquiries');
+                const newEnquiries = document.getElementById('newEnquiries');
+                const pendingEnquiries = document.getElementById('pendingEnquiries');
+                
+                tableBody.innerHTML = '';
+                
+                let counts = { total: 0, new: 0, pending: 0 };
+
+                if (snapshot.exists()) {
+                    const enquiries = snapshot.val();
+                    const enquiriesArray = Object.keys(enquiries).map(key => ({
+                        id: key,
+                        ...enquiries[key]
+                    }));
+
+                    // Sort by submission date (newest first)
+                    enquiriesArray.sort((a, b) => new Date(b.submittedAt) - new Date(a.submittedAt));
+
+                    enquiriesArray.forEach(enquiry => {
+                        counts.total++;
+                        if (enquiry.status === 'new' || !enquiry.status) counts.new++;
+                        if (enquiry.status === 'in-progress') counts.pending++;
+                        
+                        const row = createEnquiryRow(enquiry.id, enquiry);
+                        tableBody.innerHTML += row;
+                    });
+                } else {
+                    tableBody.innerHTML = '<tr><td colspan="9" class="no-data">No enquiries found</td></tr>';
+                }
+
+                // Update summary stats
+                totalEnquiries.textContent = counts.total;
+                newEnquiries.textContent = counts.new;
+                pendingEnquiries.textContent = counts.pending;
+
+                // Update main dashboard enquiries count
+                const enquiryStatCard = document.querySelector('.stat-card.enquiries .stat-value');
+                if (enquiryStatCard) {
+                    enquiryStatCard.textContent = counts.new;
+                }
+            });
+        }
+
+        // Create enquiry table row
+        function createEnquiryRow(id, enquiry) {
+            const statusClass = enquiry.status === 'resolved' ? 'resolved' : 
+                              enquiry.status === 'in-progress' ? 'in-progress' : 'new';
+            const statusText = enquiry.status || 'new';
+            
+            // Format date
+            let submittedDate = 'N/A';
+            let submittedTime = '';
+            
+            if (enquiry.submittedAt) {
+                const date = new Date(enquiry.submittedAt);
+                submittedDate = date.toLocaleDateString();
+                submittedTime = date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            }
+
+            // Truncate message for preview
+            const messagePreview = enquiry.message ? 
+                (enquiry.message.length > 50 ? enquiry.message.substring(0, 50) + '...' : enquiry.message) : 
+                'No message';
+
+            // Short ID for display
+            const shortId = id.substring(0, 8);
+
+            return `
+                <tr data-enquiry-id="${id}">
+                    <td><span class="enquiry-id">${shortId}</span></td>
+                    <td>${enquiry.name || 'N/A'}</td>
+                    <td>${enquiry.email || 'N/A'}</td>
+                    <td>${enquiry.phone || 'N/A'}</td>
+                    <td>${enquiry.subject || 'N/A'}</td>
+                    <td>
+                        <span class="enquiry-message-preview" data-full-message="${(enquiry.message || '').replace(/"/g, '&quot;')}">${messagePreview}</span>
+                    </td>
+                    <td><span class="status-badge ${statusClass}">${statusText.toUpperCase()}</span></td>
+                    <td>${submittedDate}<br><small style="color: #999;">${submittedTime}</small></td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="action-icon-btn view-enquiry-btn" data-id="${id}" title="View Details">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                                </svg>
+                            </button>
+                            <button class="action-icon-btn delete-enquiry-btn" data-id="${id}" title="Delete">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        }
+
+        // Search enquiries
+        document.getElementById('enquirySearch')?.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('#enquiriesTableBody tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchTerm) ? '' : 'none';
+            });
+        });
+
+        // Filter enquiries by status
+        document.getElementById('enquiryFilter')?.addEventListener('change', function(e) {
+            const filterValue = e.target.value;
+            const rows = document.querySelectorAll('#enquiriesTableBody tr');
+            
+            rows.forEach(row => {
+                if (filterValue === 'all') {
+                    row.style.display = '';
+                } else {
+                    const status = row.querySelector('.status-badge');
+                    if (status) {
+                        const statusText = status.textContent.toLowerCase();
+                        row.style.display = statusText.includes(filterValue) ? '' : 'none';
+                    }
+                }
+            });
+        });
+
+        // View enquiry details
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.view-enquiry-btn') || e.target.closest('.enquiry-message-preview')) {
+                const btn = e.target.closest('.view-enquiry-btn') || e.target.closest('.enquiry-message-preview');
+                const enquiryId = btn.getAttribute('data-id') || btn.closest('tr').getAttribute('data-enquiry-id');
+                
+                // Get enquiry data from Firebase
+                const enquiryRef = ref(database, 'contact-enquiries/' + enquiryId);
+                onValue(enquiryRef, (snapshot) => {
+                    if (snapshot.exists()) {
+                        const enquiry = snapshot.val();
+                        showEnquiryDetails(enquiryId, enquiry);
+                    }
+                }, { onlyOnce: true });
+            }
+        });
+
+        // Show enquiry details modal
+        function showEnquiryDetails(id, enquiry) {
+            document.getElementById('detailEnquiryId').textContent = id.substring(0, 12) + '...';
+            document.getElementById('detailName').textContent = enquiry.name || 'N/A';
+            document.getElementById('detailEmail').textContent = enquiry.email || 'N/A';
+            document.getElementById('detailPhone').textContent = enquiry.phone || 'N/A';
+            document.getElementById('detailSubject').textContent = enquiry.subject || 'N/A';
+            document.getElementById('detailMessage').textContent = enquiry.message || 'No message provided';
+            document.getElementById('detailStatus').value = enquiry.status || 'new';
+            
+            const submittedDate = enquiry.submittedAt ? new Date(enquiry.submittedAt).toLocaleString() : 'N/A';
+            document.getElementById('detailSubmitted').textContent = submittedDate;
+            
+            // Store current enquiry ID for updates
+            document.getElementById('enquiryDetailsModal').setAttribute('data-enquiry-id', id);
+            document.getElementById('enquiryDetailsModal').classList.add('show');
+        }
+
+        // Update enquiry status
+        document.getElementById('updateEnquiryStatus')?.addEventListener('click', function() {
+            const modal = document.getElementById('enquiryDetailsModal');
+            const enquiryId = modal.getAttribute('data-enquiry-id');
+            const newStatus = document.getElementById('detailStatus').value;
+            
+            const enquiryRef = ref(database, 'contact-enquiries/' + enquiryId + '/status');
+            set(enquiryRef, newStatus).then(() => {
+                alert('Enquiry status updated successfully!');
+                modal.classList.remove('show');
+            }).catch((error) => {
+                alert('Error updating status: ' + error.message);
+            });
+        });
+
+        // Delete enquiry
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.delete-enquiry-btn') || e.target.closest('#deleteEnquiry')) {
+                let enquiryId;
+                
+                if (e.target.closest('.delete-enquiry-btn')) {
+                    enquiryId = e.target.closest('.delete-enquiry-btn').getAttribute('data-id');
+                } else {
+                    enquiryId = document.getElementById('enquiryDetailsModal').getAttribute('data-enquiry-id');
+                }
+                
+                if (confirm('Are you sure you want to delete this enquiry? This action cannot be undone.')) {
+                    const enquiryRef = ref(database, 'contact-enquiries/' + enquiryId);
+                    remove(enquiryRef).then(() => {
+                        alert('Enquiry deleted successfully!');
+                        document.getElementById('enquiryDetailsModal').classList.remove('show');
+                    }).catch((error) => {
+                        alert('Error deleting enquiry: ' + error.message);
+                    });
+                }
+            }
+        });
+
+        // Close enquiry modal
+        document.getElementById('closeEnquiryModal')?.addEventListener('click', function() {
+            document.getElementById('enquiryDetailsModal').classList.remove('show');
+        });
+
+        document.getElementById('cancelEnquiryModal')?.addEventListener('click', function() {
+            document.getElementById('enquiryDetailsModal').classList.remove('show');
+        });
+
+        // Make loadEnquiries available globally
+        window.loadEnquiries = loadEnquiries;
+        
+        // Debug logging
+        console.log('✅ Enquiries module functions loaded');
+        console.log('📊 loadEnquiries function:', typeof window.loadEnquiries);
+        console.log('🔍 enquiriesModule element:', document.getElementById('enquiriesModule'));
+
         // Make loadBookings available globally
         window.loadBookings = loadBookings;
     </script>
@@ -1784,6 +2268,7 @@
                 const otherContent = document.getElementById('otherContent');
                 const customersModule = document.getElementById('customersModule');
                 const bookingsModule = document.getElementById('bookingsModule');
+                const enquiriesModule = document.getElementById('enquiriesModule');
                 
                 if (module === 'dashboard') {
                     dashboardStats.style.display = 'grid';
@@ -1792,6 +2277,7 @@
                     otherContent.style.display = 'none';
                     customersModule.style.display = 'none';
                     bookingsModule.style.display = 'none';
+                    enquiriesModule.style.display = 'none';
                 } else if (module === 'customers') {
                     dashboardStats.style.display = 'none';
                     quickActions.style.display = 'none';
@@ -1799,6 +2285,7 @@
                     otherContent.style.display = 'none';
                     customersModule.style.display = 'block';
                     bookingsModule.style.display = 'none';
+                    enquiriesModule.style.display = 'none';
                     // Load customers when module is opened
                     if (window.loadCustomers) {
                         window.loadCustomers();
@@ -1810,9 +2297,27 @@
                     otherContent.style.display = 'none';
                     customersModule.style.display = 'none';
                     bookingsModule.style.display = 'block';
+                    enquiriesModule.style.display = 'none';
                     // Load bookings when module is opened
                     if (window.loadBookings) {
                         window.loadBookings();
+                    }
+                } else if (module === 'enquiries') {
+                    console.log('🔍 Switching to enquiries module');
+                    dashboardStats.style.display = 'none';
+                    quickActions.style.display = 'none';
+                    chartsContainer.style.display = 'none';
+                    otherContent.style.display = 'none';
+                    customersModule.style.display = 'none';
+                    bookingsModule.style.display = 'none';
+                    enquiriesModule.style.display = 'block';
+                    console.log('📊 Enquiries module display set to block');
+                    // Load enquiries when module is opened
+                    if (window.loadEnquiries) {
+                        console.log('📞 Calling loadEnquiries function');
+                        window.loadEnquiries();
+                    } else {
+                        console.error('❌ loadEnquiries function not found');
                     }
                 } else {
                     dashboardStats.style.display = 'none';
@@ -1821,6 +2326,7 @@
                     otherContent.style.display = 'flex';
                     customersModule.style.display = 'none';
                     bookingsModule.style.display = 'none';
+                    enquiriesModule.style.display = 'none';
                     otherContent.querySelector('p').textContent = `${title} content will be displayed here...`;
                 }
             });
