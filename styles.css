@@ -1493,6 +1493,20 @@ body {
         padding: 0.9rem 2rem;
         font-size: 1rem;
     }
+    
+    /* Amenities on tablets */
+    .amenities-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+        margin-left: calc(-50vw + 50%);
+        margin-right: calc(-50vw + 50%);
+        width: 100vw;
+    }
+    
+    .amenity-item {
+        border-radius: 0;
+        height: 200px;
+    }
 }
 
 /* Extra small devices (phones, 600px and down) */
@@ -1709,9 +1723,23 @@ body {
 
     /* Amenities on mobile */
     .amenities-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-        padding: 0 0.5rem;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.3rem;
+        padding: 0;
+        margin-left: calc(-50vw + 50%);
+        margin-right: calc(-50vw + 50%);
+        width: 100vw;
+    }
+    
+    .amenity-item {
+        border-radius: 0;
+        height: 180px;
+    }
+    
+    .amenity-label {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.85rem;
+        bottom: 15px;
     }
 
     .amenities-title {
@@ -1958,5 +1986,20 @@ body {
     .btn-restaurants-rooms {
         padding: 0.7rem 0.8rem;
         font-size: 0.75rem;
+    }
+    
+    /* Amenities on very small phones */
+    .amenities-grid {
+        gap: 0.2rem;
+    }
+    
+    .amenity-item {
+        height: 150px;
+    }
+    
+    .amenity-label {
+        padding: 0.5rem 1rem;
+        font-size: 0.75rem;
+        bottom: 10px;
     }
 }
