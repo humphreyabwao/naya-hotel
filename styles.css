@@ -3236,6 +3236,71 @@ body {
     height: 20px;
 }
 
+/* ========================
+   Floating Buttons
+======================== */
+.floating-whatsapp,
+.floating-scroll-top {
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    z-index: 999;
+    border: none;
+    text-decoration: none;
+}
+
+.floating-whatsapp {
+    bottom: 30px;
+    right: 20px;
+    background: #25D366;
+}
+
+.floating-whatsapp svg {
+    width: 28px;
+    height: 28px;
+    fill: white;
+}
+
+.floating-whatsapp:hover {
+    background: #128C7E;
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+}
+
+.floating-scroll-top {
+    bottom: 30px;
+    left: 20px;
+    background: var(--primary-red);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+}
+
+.floating-scroll-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.floating-scroll-top svg {
+    width: 20px;
+    height: 20px;
+    fill: white;
+}
+
+.floating-scroll-top:hover {
+    background: var(--dark-red);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(193, 18, 31, 0.4);
+}
+
 .booking-success {
     background: #d4edda;
     border: 2px solid #28a745;
@@ -3335,6 +3400,34 @@ body {
         min-height: 220px;
         margin-top: 70px;
     }
+
+    /* Floating Buttons Mobile */
+    .floating-whatsapp,
+    .floating-scroll-top {
+        width: 45px;
+        height: 45px;
+    }
+
+    .floating-whatsapp {
+        bottom: 20px;
+        right: 15px;
+    }
+
+    .floating-whatsapp svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .floating-scroll-top {
+        bottom: 20px;
+        left: 15px;
+    }
+
+    .floating-scroll-top svg {
+        width: 18px;
+        height: 18px;
+    }
+
 
     .booking-hero-content h1 {
         font-size: 2rem;
