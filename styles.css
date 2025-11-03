@@ -2039,6 +2039,395 @@ body {
     }
 }
 
+/* Promotional Advertisement Section */
+.promo-ad-section {
+    background: linear-gradient(135deg, #FF6B35 0%, #FF8C61 50%, #FFB088 100%);
+    padding: 2.5rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.promo-ad-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 10px,
+            rgba(255, 255, 255, 0.03) 10px,
+            rgba(255, 255, 255, 0.03) 20px
+        );
+    animation: stripeMove 20s linear infinite;
+}
+
+@keyframes stripeMove {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(40px); }
+}
+
+.promo-ad-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 3rem;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* Carousel Side */
+.promo-carousel {
+    position: relative;
+    height: 280px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.promo-carousel-track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.promo-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.promo-slide.active-promo {
+    opacity: 1;
+    z-index: 1;
+}
+
+.promo-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.9);
+}
+
+.promo-slide-badge {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--primary-orange);
+    padding: 0.5rem 1.2rem;
+    border-radius: 25px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    animation: badgePulse 2s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Sparkle Animations */
+.sparkle {
+    position: absolute;
+    font-size: 1.5rem;
+    z-index: 2;
+    animation: sparkleFloat 3s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.sparkle-1 {
+    top: 10%;
+    right: 10%;
+    animation-delay: 0s;
+}
+
+.sparkle-2 {
+    bottom: 15%;
+    right: 15%;
+    animation-delay: 1s;
+}
+
+.sparkle-3 {
+    top: 50%;
+    left: 10%;
+    animation-delay: 2s;
+}
+
+@keyframes sparkleFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.7;
+    }
+    50% {
+        transform: translateY(-20px) rotate(180deg);
+        opacity: 1;
+    }
+}
+
+/* Content Side */
+.promo-content {
+    position: relative;
+    color: var(--white);
+    animation: slideInRight 0.8s ease-out;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.promo-badge-floating {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: var(--white);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+    animation: floatBadge 3s ease-in-out infinite;
+}
+
+@keyframes floatBadge {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+.promo-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.8rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.promo-highlight {
+    display: block;
+    font-size: 1.4rem;
+    color: #FFE55C;
+    margin-top: 0.3rem;
+    animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+    0%, 100% {
+        text-shadow: 0 0 10px rgba(255, 229, 92, 0.5), 0 0 20px rgba(255, 229, 92, 0.3);
+    }
+    50% {
+        text-shadow: 0 0 20px rgba(255, 229, 92, 0.8), 0 0 30px rgba(255, 229, 92, 0.5);
+    }
+}
+
+.promo-description {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    opacity: 0.95;
+    font-weight: 300;
+}
+
+.promo-benefits {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+.benefit-tag {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(5px);
+    padding: 0.4rem 0.9rem;
+    border-radius: 15px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.benefit-tag:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+.btn-promo-book {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--white);
+    color: var(--primary-orange);
+    padding: 0.9rem 2rem;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    animation: buttonPulse 2s ease-in-out infinite;
+}
+
+@keyframes buttonPulse {
+    0%, 100% {
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+    50% {
+        box-shadow: 0 8px 35px rgba(255, 255, 255, 0.4), 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+}
+
+.btn-promo-book:hover {
+    background: var(--dark-red);
+    color: var(--white);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+}
+
+.btn-arrow {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.btn-promo-book:hover .btn-arrow {
+    transform: translateX(5px);
+}
+
+/* Tablet Responsive */
+@media (max-width: 968px) {
+    .promo-ad-section {
+        padding: 2rem 0;
+    }
+    
+    .promo-ad-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 0 1.5rem;
+    }
+    
+    .promo-carousel {
+        height: 240px;
+    }
+    
+    .promo-content {
+        text-align: center;
+    }
+    
+    .promo-title {
+        font-size: 1.5rem;
+    }
+    
+    .promo-highlight {
+        font-size: 1.2rem;
+    }
+    
+    .promo-benefits {
+        justify-content: center;
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+    .promo-ad-section {
+        padding: 1.5rem 0;
+    }
+    
+    .promo-ad-container {
+        gap: 1.5rem;
+        padding: 0 1rem;
+    }
+    
+    .promo-carousel {
+        height: 200px;
+        border-radius: 15px;
+    }
+    
+    .promo-slide-badge {
+        font-size: 0.65rem;
+        padding: 0.4rem 0.9rem;
+        bottom: 15px;
+        left: 15px;
+    }
+    
+    .sparkle {
+        font-size: 1.2rem;
+    }
+    
+    .promo-badge-floating {
+        font-size: 0.65rem;
+        padding: 0.3rem 0.8rem;
+    }
+    
+    .promo-title {
+        font-size: 1.3rem;
+    }
+    
+    .promo-highlight {
+        font-size: 1.1rem;
+    }
+    
+    .promo-description {
+        font-size: 0.8rem;
+        margin-bottom: 0.8rem;
+    }
+    
+    .promo-benefits {
+        gap: 0.5rem;
+    }
+    
+    .benefit-tag {
+        font-size: 0.65rem;
+        padding: 0.3rem 0.7rem;
+    }
+    
+    .btn-promo-book {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.75rem;
+    }
+}
+
+/* Very Small Screens */
+@media (max-width: 360px) {
+    .promo-carousel {
+        height: 180px;
+    }
+    
+    .promo-title {
+        font-size: 1.1rem;
+    }
+    
+    .promo-highlight {
+        font-size: 1rem;
+    }
+    
+    .promo-description {
+        font-size: 0.75rem;
+    }
+}
+
 /* Reviews & Stats Section */
 .reviews-stats-section {
     background: linear-gradient(135deg, var(--dark-red) 0%, var(--primary-red) 100%);

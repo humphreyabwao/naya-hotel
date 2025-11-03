@@ -100,6 +100,27 @@ function nextSlide() {
 // Auto slide every 5 seconds - seamless and continuous
 setInterval(nextSlide, 5000);
 
+// Promo Carousel Animation
+let currentPromoSlide = 0;
+const promoSlides = document.querySelectorAll('.promo-slide');
+const totalPromoSlides = promoSlides.length;
+
+function showPromoSlide(index) {
+    promoSlides.forEach(slide => slide.classList.remove('active-promo'));
+    promoSlides[index].classList.add('active-promo');
+}
+
+function nextPromoSlide() {
+    currentPromoSlide = (currentPromoSlide + 1) % totalPromoSlides;
+    showPromoSlide(currentPromoSlide);
+}
+
+// Auto-rotate promo carousel every 4 seconds
+if (promoSlides.length > 0) {
+    setInterval(nextPromoSlide, 4000);
+}
+
+
 // Image Zoom Modal for Services
 const modal = document.getElementById('imageModal');
 const modalImg = document.getElementById('modalImage');
