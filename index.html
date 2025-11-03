@@ -467,6 +467,18 @@
                         </div>
                         
                         <button type="submit" class="btn-submit-form">Send Message</button>
+                        
+                        <!-- Success Message -->
+                        <div id="contactSuccess" class="contact-message success" style="display: none;">
+                            <strong>✓ Message Sent Successfully!</strong>
+                            <p>Thank you for contacting us. We will get back to you soon.</p>
+                        </div>
+                        
+                        <!-- Error Message -->
+                        <div id="contactError" class="contact-message error" style="display: none;">
+                            <strong>✕ Error Sending Message</strong>
+                            <p id="contactErrorText">Something went wrong. Please try again or contact us at +254 722 260 563</p>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -652,6 +664,118 @@
                 setTimeout(() => {
                     errorMsg.style.display = 'none';
                 }, 5000);
+            }
+        });
+    </script>
+    
+    <!-- Firebase SDK for Contact Form -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCT_6WJjJInYpNujwsw6jPRxcaiOuusMJc",
+            authDomain: "naya-elite-hotel.firebaseapp.com",
+            databaseURL: "https://naya-elite-hotel-default-rtdb.firebaseio.com",
+            projectId: "naya-elite-hotel",
+            storageBucket: "naya-elite-hotel.firebasestorage.app",
+            messagingSenderId: "1087501013471",
+            appId: "1:1087501013471:web:e5838687c9601c16f3346a",
+            measurementId: "G-5QX8FTNHJ7"
+        };
+
+        // Initialize Firebase
+        let app, database;
+        try {
+            app = initializeApp(firebaseConfig, 'contact-app');
+            database = getDatabase(app);
+            console.log("✅ Firebase Realtime Database initialized successfully for contact form");
+        } catch (error) {
+            console.error("❌ Firebase initialization error:", error);
+        }
+
+        // Contact form submission
+        const contactForm = document.getElementById('contactForm');
+        const contactSuccess = document.getElementById('contactSuccess');
+        const contactError = document.getElementById('contactError');
+        const contactErrorText = document.getElementById('contactErrorText');
+
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Hide previous messages
+            contactSuccess.style.display = 'none';
+            contactError.style.display = 'none';
+
+            // Get the submit button
+            const submitBtn = contactForm.querySelector('.btn-submit-form');
+            const originalText = submitBtn.textContent;
+            
+            // Disable button and show loading state
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+
+            try {
+                if (!database) {
+                    throw new Error('Database not initialized');
+                }
+
+                // Get form data
+                const formData = {
+                    name: document.getElementById('name').value.trim(),
+                    email: document.getElementById('email').value.trim(),
+                    phone: document.getElementById('phone').value.trim() || 'Not provided',
+                    subject: document.getElementById('subject').value.trim(),
+                    message: document.getElementById('message').value.trim(),
+                    submittedAt: new Date().toISOString(),
+                    status: 'new'
+                };
+
+                console.log("📤 Submitting enquiry:", formData);
+
+                // Save to Firebase Realtime Database
+                const enquiriesRef = ref(database, 'contact-enquiries');
+                const newEnquiryRef = push(enquiriesRef);
+                await set(newEnquiryRef, formData);
+
+                console.log("✅ Enquiry saved successfully! Enquiry ID:", newEnquiryRef.key);
+                console.log("📧 From:", formData.email);
+                console.log("📋 Subject:", formData.subject);
+
+                // Show success message
+                contactSuccess.style.display = 'block';
+                
+                // Reset form
+                contactForm.reset();
+
+                // Scroll to success message
+                contactSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                // Hide success message after 8 seconds
+                setTimeout(() => {
+                    contactSuccess.style.display = 'none';
+                }, 8000);
+
+            } catch (error) {
+                console.error("❌ Contact form submission error:", error);
+                console.error("Error details:", error.message);
+                
+                // Show error message
+                contactErrorText.textContent = error.message || 'Something went wrong. Please try again or contact us directly at +254 722 260 563';
+                contactError.style.display = 'block';
+
+                // Scroll to error message
+                contactError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                // Hide error message after 8 seconds
+                setTimeout(() => {
+                    contactError.style.display = 'none';
+                }, 8000);
+            } finally {
+                // Re-enable button
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
             }
         });
     </script>
