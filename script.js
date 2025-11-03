@@ -182,28 +182,8 @@ sliderDots.forEach((dot, index) => {
     });
 });
 
-// Contact Form Submission
-const contactForm = document.getElementById('contactForm');
-
-contactForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Get form values
-    const formData = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        phone: document.getElementById('phone').value,
-        subject: document.getElementById('subject').value,
-        message: document.getElementById('message').value
-    };
-    
-    // You can add your form submission logic here
-    // For now, just show a success message
-    alert('Thank you for your enquiry! We will get back to you soon.');
-    
-    // Reset form
-    contactForm.reset();
-});
+// Contact Form Submission is handled by Firebase in index.html
+// Removed duplicate implementation to prevent conflicts
 
 // Automated Reviews Slider
 const reviews = [
