@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="format-detection" content="telephone=no">
+    <title>Gallery - Naya Hotel Bondo</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="images/image.png" alt="Naya Hotel Bondo Logo" class="logo-image">
+                <span class="logo-text">NAYA HOTEL BONDO</span>
+            </div>
+            
+            <div class="nav-right">
+                <div class="social-icons social-icons-mobile">
+                    <a href="https://facebook.com" target="_blank" class="social-icon" aria-label="Facebook">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" class="social-icon" aria-label="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                    <a href="https://twitter.com" target="_blank" class="social-icon" aria-label="Twitter">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                    <a href="https://tiktok.com" target="_blank" class="social-icon" aria-label="TikTok">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="menu-toggle" id="mobile-menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html#home" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#about" class="nav-link">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#services" class="nav-link">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#restaurants" class="nav-link">Restaurants</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#contact" class="nav-link">Contact Us</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#contact" class="nav-link btn-book">Book Now</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link btn-signin">Sign In</a>
+                </li>
+                <li class="nav-item social-icons-desktop">
+                    <div class="social-icons">
+                        <a href="https://facebook.com" target="_blank" class="social-icon" aria-label="Facebook">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </a>
+                        <a href="https://instagram.com" target="_blank" class="social-icon" aria-label="Instagram">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                        <a href="https://twitter.com" target="_blank" class="social-icon" aria-label="Twitter">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                            </svg>
+                        </a>
+                        <a href="https://tiktok.com" target="_blank" class="social-icon" aria-label="TikTok">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Gallery Hero Section -->
+    <section class="gallery-hero">
+        <div class="gallery-hero-overlay"></div>
+        <div class="gallery-hero-content">
+            <h1>Our Gallery</h1>
+            <p>Explore the beauty and elegance of Naya Hotel Bondo</p>
+        </div>
+    </section>
+
+    <!-- Gallery Content -->
+    <section class="gallery-section">
+        <div class="gallery-container">
+            <h1 class="gallery-main-title">Our Gallery</h1>
+
+            <!-- Reception Section -->
+            <div class="gallery-category">
+                <h2 class="category-title">Reception</h2>
+                <div class="image-grid">
+                    <div class="gallery-item" data-name="Reception Area 1">
+                        <img src="images/image.png" alt="Reception Area 1">
+                    </div>
+                    <div class="gallery-item" data-name="Reception Area 2">
+                        <img src="images/image.png" alt="Reception Area 2">
+                    </div>
+                    <div class="gallery-item" data-name="Reception Area 3">
+                        <img src="images/image.png" alt="Reception Area 3">
+                    </div>
+                    <div class="gallery-item" data-name="Reception Area 4">
+                        <img src="images/image.png" alt="Reception Area 4">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dining Section -->
+            <div class="gallery-category">
+                <h2 class="category-title">Dining</h2>
+                <div class="image-grid">
+                    <div class="gallery-item" data-name="Dining Hall 1">
+                        <img src="images/image.png" alt="Dining Hall 1">
+                    </div>
+                    <div class="gallery-item" data-name="Dining Hall 2">
+                        <img src="images/image.png" alt="Dining Hall 2">
+                    </div>
+                    <div class="gallery-item" data-name="Dining Hall 3">
+                        <img src="images/image.png" alt="Dining Hall 3">
+                    </div>
+                    <div class="gallery-item" data-name="Dining Hall 4">
+                        <img src="images/image.png" alt="Dining Hall 4">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Parking Section -->
+            <div class="gallery-category">
+                <h2 class="category-title">Parking</h2>
+                <div class="image-grid">
+                    <div class="gallery-item" data-name="Parking Area 1">
+                        <img src="images/image.png" alt="Parking Area 1">
+                    </div>
+                    <div class="gallery-item" data-name="Parking Area 2">
+                        <img src="images/image.png" alt="Parking Area 2">
+                    </div>
+                    <div class="gallery-item" data-name="Parking Area 3">
+                        <img src="images/image.png" alt="Parking Area 3">
+                    </div>
+                    <div class="gallery-item" data-name="Parking Area 4">
+                        <img src="images/image.png" alt="Parking Area 4">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Standard Rooms Section -->
+            <div class="gallery-category">
+                <h2 class="category-title">Standard Rooms</h2>
+                <div class="image-grid">
+                    <div class="gallery-item" data-name="Standard Room 1">
+                        <img src="images/image.png" alt="Standard Room 1">
+                    </div>
+                    <div class="gallery-item" data-name="Standard Room 2">
+                        <img src="images/image.png" alt="Standard Room 2">
+                    </div>
+                    <div class="gallery-item" data-name="Standard Room 3">
+                        <img src="images/image.png" alt="Standard Room 3">
+                    </div>
+                    <div class="gallery-item" data-name="Standard Room 4">
+                        <img src="images/image.png" alt="Standard Room 4">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Executive Rooms Section -->
+            <div class="gallery-category">
+                <h2 class="category-title">Executive Rooms</h2>
+                <div class="image-grid">
+                    <div class="gallery-item" data-name="Executive Room 1">
+                        <img src="images/image.png" alt="Executive Room 1">
+                    </div>
+                    <div class="gallery-item" data-name="Executive Room 2">
+                        <img src="images/image.png" alt="Executive Room 2">
+                    </div>
+                    <div class="gallery-item" data-name="Executive Room 3">
+                        <img src="images/image.png" alt="Executive Room 3">
+                    </div>
+                    <div class="gallery-item" data-name="Executive Room 4">
+                        <img src="images/image.png" alt="Executive Room 4">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Restaurant Section -->
+            <div class="gallery-category">
+                <h2 class="category-title">Restaurant</h2>
+                <div class="image-grid">
+                    <div class="gallery-item" data-name="Restaurant View 1">
+                        <img src="images/image.png" alt="Restaurant View 1">
+                    </div>
+                    <div class="gallery-item" data-name="Restaurant View 2">
+                        <img src="images/image.png" alt="Restaurant View 2">
+                    </div>
+                    <div class="gallery-item" data-name="Restaurant View 3">
+                        <img src="images/image.png" alt="Restaurant View 3">
+                    </div>
+                    <div class="gallery-item" data-name="Restaurant View 4">
+                        <img src="images/image.png" alt="Restaurant View 4">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conference Rooms Section -->
+            <div class="gallery-category">
+                <h2 class="category-title">Conference Rooms</h2>
+                <div class="image-grid">
+                    <div class="gallery-item" data-name="Conference Room 1">
+                        <img src="images/image.png" alt="Conference Room 1">
+                    </div>
+                    <div class="gallery-item" data-name="Conference Room 2">
+                        <img src="images/image.png" alt="Conference Room 2">
+                    </div>
+                    <div class="gallery-item" data-name="Conference Room 3">
+                        <img src="images/image.png" alt="Conference Room 3">
+                    </div>
+                    <div class="gallery-item" data-name="Conference Room 4">
+                        <img src="images/image.png" alt="Conference Room 4">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Zoom Modal -->
+    <div class="zoom-modal" id="zoomModal">
+        <span class="close-zoom">&times;</span>
+        <div class="zoom-content">
+            <img class="zoom-image" id="zoomImage" src="" alt="">
+            <div class="zoom-caption" id="zoomCaption"></div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>NAYA HOTEL BONDO</h3>
+                <p>Experience luxury and comfort at its finest. Your home away from home in the heart of Bondo.</p>
+                <div class="footer-social">
+                    <a href="#" aria-label="Facebook"><i>📘</i></a>
+                    <a href="#" aria-label="Instagram"><i>📷</i></a>
+                    <a href="#" aria-label="Twitter"><i>🐦</i></a>
+                    <a href="#" aria-label="LinkedIn"><i>💼</i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="index.html#about">About Us</a></li>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="index.html#restaurants">Restaurants</a></li>
+                    <li><a href="index.html#contact">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Our Services</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html#services">Luxury Accommodation</a></li>
+                    <li><a href="index.html#restaurants">Fine Dining</a></li>
+                    <li><a href="index.html#services">Spa & Wellness</a></li>
+                    <li><a href="index.html#services">Conference Facilities</a></li>
+                    <li><a href="index.html#services">Swimming Pool</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Contact Info</h4>
+                <ul class="footer-contact">
+                    <li>📍 Bondo, Kenya</li>
+                    <li>📞 +254 XXX XXX XXX</li>
+                    <li>✉️ info@nayahotelbondo.com</li>
+                    <li>🕐 24/7 Reception</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 Naya Hotel Bondo. All rights reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy Policy</a>
+                <span>|</span>
+                <a href="#">Terms & Conditions</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="gallery.js"></script>
+</body>
+</html>
