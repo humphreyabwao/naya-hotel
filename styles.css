@@ -2923,6 +2923,93 @@ body {
     }
 }
 
+/* Gallery Promotional Section */
+.gallery-promo {
+    background: var(--dark-red);
+    padding: 25px 20px;
+    margin-bottom: 0;
+}
+
+.gallery-promo-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.promo-text {
+    color: var(--white);
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 0;
+    letter-spacing: 0.5px;
+    line-height: 1.4;
+}
+
+.promo-btn {
+    background: var(--primary-orange);
+    color: var(--white);
+    padding: 12px 35px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.promo-btn:hover {
+    background: var(--light-orange);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+}
+
+/* Seamless footer connection */
+.gallery-promo + .footer {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+@media screen and (max-width: 768px) {
+    .gallery-promo {
+        padding: 20px 15px;
+    }
+
+    .gallery-promo-content {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .promo-text {
+        font-size: 0.85rem;
+        line-height: 1.5;
+    }
+
+    .promo-btn {
+        padding: 10px 25px;
+        font-size: 0.9rem;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .gallery-promo {
+        padding: 22px 20px;
+    }
+
+    .promo-text {
+        font-size: 0.95rem;
+    }
+
+    .promo-btn {
+        padding: 11px 30px;
+    }
+}
+
 @media screen and (min-width: 769px) and (max-width: 1024px) {
     .image-grid {
         grid-template-columns: repeat(2, 1fr);
