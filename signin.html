@@ -109,6 +109,186 @@
             justify-content: center;
             font-size: 10px;
             font-weight: 600;
+            animation: pulse 2s infinite;
+        }
+
+        .notification-badge.hidden {
+            display: none;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        /* Notification Dropdown */
+        .notification-dropdown {
+            position: absolute;
+            top: 65px;
+            right: 200px;
+            width: 380px;
+            max-height: 500px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1001;
+            overflow: hidden;
+        }
+
+        .notification-dropdown.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .notification-header {
+            padding: 20px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .notification-header h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin: 0;
+        }
+
+        .mark-all-read {
+            font-size: 12px;
+            color: #FF6B35;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .mark-all-read:hover {
+            text-decoration: underline;
+        }
+
+        .notification-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .notification-item {
+            padding: 15px 20px;
+            border-bottom: 1px solid #f5f5f5;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .notification-item:hover {
+            background: #f9f9f9;
+        }
+
+        .notification-item.unread {
+            background: #fff5f0;
+        }
+
+        .notification-item.unread::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 6px;
+            background: #FF6B35;
+            border-radius: 50%;
+        }
+
+        .notification-content {
+            margin-left: 10px;
+        }
+
+        .notification-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .notification-message {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .notification-time {
+            font-size: 11px;
+            color: #999;
+        }
+
+        .notification-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+        }
+
+        .notification-icon.booking {
+            background: #e3f2fd;
+            color: #2196F3;
+        }
+
+        .notification-icon.customer {
+            background: #f3e5f5;
+            color: #9C27B0;
+        }
+
+        .notification-icon.enquiry {
+            background: #fff3e0;
+            color: #FF9800;
+        }
+
+        .notification-icon.newsletter {
+            background: #e8f5e9;
+            color: #4CAF50;
+        }
+
+        .notification-icon svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        .no-notifications {
+            padding: 40px 20px;
+            text-align: center;
+            color: #999;
+            font-size: 14px;
+        }
+
+        .notification-footer {
+            padding: 15px 20px;
+            border-top: 1px solid #f0f0f0;
+            text-align: center;
+        }
+
+        .view-all-notifications {
+            color: #FF6B35;
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .view-all-notifications:hover {
+            text-decoration: underline;
         }
 
         .admin-profile {
@@ -495,21 +675,19 @@
         }
 
         .chart-body {
-            min-height: 250px;
-            max-height: 250px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #f9f9f9;
-            border-radius: 8px;
-            padding: 15px;
-            position: relative;
+            height: 280px;
             width: 100%;
+            display: block;
+            background: transparent;
+            border-radius: 8px;
+            padding: 10px;
+            position: relative;
         }
 
         .chart-body canvas {
-            max-height: 220px !important;
-            max-width: 100% !important;
+            width: 100% !important;
+            height: 100% !important;
+            display: block !important;
         }
 
         .placeholder-content {
@@ -1318,7 +1496,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"/>
                 </svg>
-                <span class="notification-badge">3</span>
+                <span class="notification-badge hidden">0</span>
             </div>
             <div class="admin-profile">
                 <div class="profile-avatar">A</div>
@@ -1328,6 +1506,26 @@
                 </div>
             </div>
         </div>
+
+        <!-- Notification Dropdown -->
+        <div class="notification-dropdown" id="notificationDropdown">
+            <div class="notification-header">
+                <h3>Notifications</h3>
+                <span class="mark-all-read" id="markAllRead">Mark all as read</span>
+            </div>
+            <div class="notification-list" id="notificationList">
+                <div class="no-notifications">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="#ddd">
+                        <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
+                    </svg>
+                    <p>No new notifications</p>
+                </div>
+            </div>
+            <div class="notification-footer">
+                <a href="#" class="view-all-notifications">View All Notifications</a>
+            </div>
+        </div>
+
         <!-- Profile Dropdown -->
         <div class="profile-dropdown" id="profileDropdown">
             <a href="#profile" class="dropdown-item">
@@ -2113,6 +2311,397 @@
         const app = initializeApp(firebaseConfig);
         const database = getDatabase(app);
 
+        // Global variables for charts
+        let bookingChart, activityChart, behaviorChart;
+        let allBookings = {};
+        let allCustomers = {};
+        let allEnquiries = {};
+        let allNewsletters = {};
+
+        // Real-time Dashboard Statistics
+        function updateDashboardStats() {
+            // Listen to bookings
+            const bookingsRef = ref(database, 'bookings');
+            onValue(bookingsRef, (snapshot) => {
+                if (snapshot.exists()) {
+                    allBookings = snapshot.val();
+                    const totalBookings = Object.keys(allBookings).length;
+                    document.querySelector('.stat-card.bookings .stat-value').textContent = totalBookings;
+                } else {
+                    allBookings = {};
+                    document.querySelector('.stat-card.bookings .stat-value').textContent = '0';
+                }
+                updateCharts();
+            });
+
+            // Listen to customers
+            const customersRef = ref(database, 'customers');
+            onValue(customersRef, (snapshot) => {
+                if (snapshot.exists()) {
+                    allCustomers = snapshot.val();
+                    const totalCustomers = Object.keys(allCustomers).length;
+                    document.querySelector('.stat-card.customers .stat-value').textContent = totalCustomers;
+                } else {
+                    allCustomers = {};
+                    document.querySelector('.stat-card.customers .stat-value').textContent = '0';
+                }
+                updateCharts();
+            });
+
+            // Listen to enquiries (contact-enquiries)
+            const enquiriesRef = ref(database, 'contact-enquiries');
+            onValue(enquiriesRef, (snapshot) => {
+                if (snapshot.exists()) {
+                    allEnquiries = snapshot.val();
+                    const totalEnquiries = Object.keys(allEnquiries).length;
+                    document.querySelector('.stat-card.enquiries .stat-value').textContent = totalEnquiries;
+                } else {
+                    allEnquiries = {};
+                    document.querySelector('.stat-card.enquiries .stat-value').textContent = '0';
+                }
+                updateCharts();
+            });
+
+            // Listen to newsletter subscribers
+            const newsletterRef = ref(database, 'newsletter-subscribers');
+            onValue(newsletterRef, (snapshot) => {
+                if (snapshot.exists()) {
+                    allNewsletters = snapshot.val();
+                    const totalSubscribers = Object.keys(allNewsletters).length;
+                    document.querySelector('.stat-card.newsletter .stat-value').textContent = totalSubscribers;
+                } else {
+                    allNewsletters = {};
+                    document.querySelector('.stat-card.newsletter .stat-value').textContent = '0';
+                }
+                updateCharts();
+            });
+        }
+
+        // Update charts with real-time data
+        function updateCharts() {
+            updateBookingChart();
+            updateActivityChart();
+            updateBehaviorChart();
+        }
+
+        function updateBookingChart() {
+            if (!bookingChart) return;
+
+            // Get last 6 months of booking data
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            const currentMonth = new Date().getMonth();
+            const last6Months = [];
+            const bookingCounts = [];
+
+            for (let i = 5; i >= 0; i--) {
+                const monthIndex = (currentMonth - i + 12) % 12;
+                last6Months.push(months[monthIndex]);
+                
+                // Count bookings for this month
+                let count = 0;
+                Object.values(allBookings).forEach(booking => {
+                    if (booking.checkInDate) {
+                        const bookingDate = new Date(booking.checkInDate);
+                        if (bookingDate.getMonth() === monthIndex) {
+                            count++;
+                        }
+                    }
+                });
+                bookingCounts.push(count);
+            }
+
+            bookingChart.data.labels = last6Months;
+            bookingChart.data.datasets[0].data = bookingCounts;
+            bookingChart.update();
+        }
+
+        function updateActivityChart() {
+            if (!activityChart) return;
+
+            // Get customer activity for the last 7 days
+            const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            const activityData = [0, 0, 0, 0, 0, 0, 0];
+
+            Object.values(allCustomers).forEach(customer => {
+                if (customer.createdAt) {
+                    const customerDate = new Date(customer.createdAt);
+                    const dayOfWeek = customerDate.getDay();
+                    activityData[dayOfWeek]++;
+                }
+            });
+
+            activityChart.data.datasets[0].data = activityData;
+            activityChart.update();
+        }
+
+        function updateBehaviorChart() {
+            if (!behaviorChart) return;
+
+            // Calculate customer status distribution
+            let activeCount = 0;
+            let completedCount = 0;
+            let pendingCount = 0;
+
+            Object.values(allCustomers).forEach(customer => {
+                const status = customer.status || 'pending';
+                if (status === 'active' || status === 'in-progress') {
+                    activeCount++;
+                } else if (status === 'completed') {
+                    completedCount++;
+                } else {
+                    pendingCount++;
+                }
+            });
+
+            behaviorChart.data.datasets[0].data = [pendingCount, activeCount, completedCount];
+            behaviorChart.update();
+        }
+
+        // Initialize dashboard on load
+        updateDashboardStats();
+
+        // ========================================
+        // REAL-TIME NOTIFICATION SYSTEM
+        // ========================================
+        
+        let notifications = [];
+        let unreadCount = 0;
+        const notificationBell = document.querySelector('.notification-bell');
+        const notificationBadge = document.querySelector('.notification-badge');
+        const notificationDropdown = document.getElementById('notificationDropdown');
+        const notificationList = document.getElementById('notificationList');
+        const markAllReadBtn = document.getElementById('markAllRead');
+
+        // Toggle notification dropdown
+        notificationBell.addEventListener('click', function(e) {
+            e.stopPropagation();
+            notificationDropdown.classList.toggle('show');
+            
+            // Close profile dropdown if open
+            document.getElementById('profileDropdown').classList.remove('show');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!notificationDropdown.contains(e.target) && !notificationBell.contains(e.target)) {
+                notificationDropdown.classList.remove('show');
+            }
+        });
+
+        // Mark all as read
+        markAllReadBtn.addEventListener('click', function() {
+            notifications.forEach(notif => notif.read = true);
+            updateNotificationUI();
+        });
+
+        // Format time ago
+        function timeAgo(timestamp) {
+            const now = new Date();
+            const date = new Date(timestamp);
+            const seconds = Math.floor((now - date) / 1000);
+            
+            if (seconds < 60) return 'Just now';
+            if (seconds < 3600) return Math.floor(seconds / 60) + ' min ago';
+            if (seconds < 86400) return Math.floor(seconds / 3600) + ' hours ago';
+            if (seconds < 604800) return Math.floor(seconds / 86400) + ' days ago';
+            return date.toLocaleDateString();
+        }
+
+        // Create notification HTML
+        function createNotificationHTML(notification) {
+            const iconType = notification.type || 'booking';
+            const iconSVG = {
+                booking: '<path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10z"/>',
+                customer: '<path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>',
+                enquiry: '<path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>',
+                newsletter: '<path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>'
+            };
+
+            return `
+                <div class="notification-item ${notification.read ? '' : 'unread'}" data-id="${notification.id}">
+                    <div class="notification-icon ${iconType}">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            ${iconSVG[iconType]}
+                        </svg>
+                    </div>
+                    <div class="notification-content">
+                        <div class="notification-title">${notification.title}</div>
+                        <div class="notification-message">${notification.message}</div>
+                        <div class="notification-time">${timeAgo(notification.timestamp)}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Update notification UI
+        function updateNotificationUI() {
+            // Update badge
+            unreadCount = notifications.filter(n => !n.read).length;
+            if (unreadCount > 0) {
+                notificationBadge.textContent = unreadCount > 9 ? '9+' : unreadCount;
+                notificationBadge.classList.remove('hidden');
+            } else {
+                notificationBadge.classList.add('hidden');
+            }
+
+            // Update notification list
+            if (notifications.length === 0) {
+                notificationList.innerHTML = `
+                    <div class="no-notifications">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="#ddd">
+                            <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
+                        </svg>
+                        <p>No new notifications</p>
+                    </div>
+                `;
+            } else {
+                // Sort by timestamp (newest first)
+                const sortedNotifications = [...notifications].sort((a, b) => 
+                    new Date(b.timestamp) - new Date(a.timestamp)
+                );
+                
+                notificationList.innerHTML = sortedNotifications
+                    .slice(0, 10) // Show only last 10 notifications
+                    .map(notif => createNotificationHTML(notif))
+                    .join('');
+
+                // Add click handlers to mark as read
+                notificationList.querySelectorAll('.notification-item').forEach(item => {
+                    item.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        const notification = notifications.find(n => n.id === id);
+                        if (notification) {
+                            notification.read = true;
+                            updateNotificationUI();
+                        }
+                    });
+                });
+            }
+        }
+
+        // Add notification
+        function addNotification(type, title, message) {
+            const notification = {
+                id: Date.now().toString(),
+                type: type,
+                title: title,
+                message: message,
+                timestamp: new Date().toISOString(),
+                read: false
+            };
+            
+            notifications.unshift(notification);
+            
+            // Keep only last 50 notifications
+            if (notifications.length > 50) {
+                notifications = notifications.slice(0, 50);
+            }
+            
+            updateNotificationUI();
+
+            // Play notification sound (optional)
+            // playNotificationSound();
+        }
+
+        // Listen for new bookings
+        const bookingsRef = ref(database, 'bookings');
+        let isFirstBookingLoad = true;
+        onValue(bookingsRef, (snapshot) => {
+            if (isFirstBookingLoad) {
+                isFirstBookingLoad = false;
+                return;
+            }
+            
+            if (snapshot.exists()) {
+                const bookings = snapshot.val();
+                const bookingKeys = Object.keys(bookings);
+                const latestKey = bookingKeys[bookingKeys.length - 1];
+                const latestBooking = bookings[latestKey];
+                
+                addNotification(
+                    'booking',
+                    'New Booking Received',
+                    `${latestBooking.name} booked ${latestBooking.roomType} for ${latestBooking.checkInDate}`
+                );
+            }
+        });
+
+        // Listen for new customers
+        const customersRef = ref(database, 'customers');
+        let isFirstCustomerLoad = true;
+        onValue(customersRef, (snapshot) => {
+            if (isFirstCustomerLoad) {
+                isFirstCustomerLoad = false;
+                return;
+            }
+            
+            if (snapshot.exists()) {
+                const customers = snapshot.val();
+                const customerKeys = Object.keys(customers);
+                const latestKey = customerKeys[customerKeys.length - 1];
+                const latestCustomer = customers[latestKey];
+                
+                addNotification(
+                    'customer',
+                    'New Customer Registered',
+                    `${latestCustomer.name} (${latestCustomer.email}) has been added`
+                );
+            }
+        });
+
+        // Listen for new enquiries
+        const enquiriesRef = ref(database, 'contact-enquiries');
+        let isFirstEnquiryLoad = true;
+        onValue(enquiriesRef, (snapshot) => {
+            if (isFirstEnquiryLoad) {
+                isFirstEnquiryLoad = false;
+                return;
+            }
+            
+            if (snapshot.exists()) {
+                const enquiries = snapshot.val();
+                const enquiryKeys = Object.keys(enquiries);
+                const latestKey = enquiryKeys[enquiryKeys.length - 1];
+                const latestEnquiry = enquiries[latestKey];
+                
+                addNotification(
+                    'enquiry',
+                    'New Contact Enquiry',
+                    `${latestEnquiry.name} sent a message: "${latestEnquiry.message.substring(0, 50)}..."`
+                );
+            }
+        });
+
+        // Listen for new newsletter subscribers
+        const newsletterRef = ref(database, 'newsletter-subscribers');
+        let isFirstNewsletterLoad = true;
+        onValue(newsletterRef, (snapshot) => {
+            if (isFirstNewsletterLoad) {
+                isFirstNewsletterLoad = false;
+                return;
+            }
+            
+            if (snapshot.exists()) {
+                const subscribers = snapshot.val();
+                const subscriberKeys = Object.keys(subscribers);
+                const latestKey = subscriberKeys[subscriberKeys.length - 1];
+                const latestSubscriber = subscribers[latestKey];
+                
+                addNotification(
+                    'newsletter',
+                    'New Newsletter Subscriber',
+                    `${latestSubscriber.email} subscribed to the newsletter`
+                );
+            }
+        });
+
+        // Initialize notification UI
+        updateNotificationUI();
+
+        // ========================================
+        // END OF NOTIFICATION SYSTEM
+        // ========================================
+
         // Real-time customer data listener
         function loadCustomers() {
             const customersRef = ref(database, 'customers');
@@ -2132,6 +2721,9 @@
                 }
             });
         }
+
+        // Make loadCustomers globally available
+        window.loadCustomers = loadCustomers;
 
         // Create customer table row
         function createCustomerRow(id, customer) {
@@ -2616,6 +3208,9 @@
             });
         }
 
+        // Make loadBookings globally available
+        window.loadBookings = loadBookings;
+
         // Create booking table row
         function createBookingRow(id, booking) {
             let statusClass = 'active';
@@ -2823,6 +3418,9 @@
                 }
             });
         }
+
+        // Make loadEnquiries globally available
+        window.loadEnquiries = loadEnquiries;
 
         // Create enquiry table row
         function createEnquiryRow(id, enquiry) {
@@ -3331,102 +3929,177 @@
 
         // Initialize Charts
         function initializeCharts() {
+            console.log('🎨 Initializing charts...');
+            
             // Booking Trends Chart (Line Chart)
             const bookingCtx = document.getElementById('bookingChart');
             if (bookingCtx) {
-                new Chart(bookingCtx, {
+                console.log('✅ Booking chart canvas found');
+                bookingChart = new Chart(bookingCtx, {
                     type: 'line',
                     data: {
                         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
                         datasets: [{
                             label: 'Bookings',
-                            data: [12, 19, 15, 25, 22, 30],
+                            data: [0, 0, 0, 0, 0, 0],
                             borderColor: '#FF6B35',
                             backgroundColor: 'rgba(255, 107, 53, 0.1)',
                             tension: 0.4,
-                            fill: true
+                            fill: true,
+                            borderWidth: 2
                         }]
                     },
                     options: {
                         responsive: true,
-                        maintainAspectRatio: false,
+                        maintainAspectRatio: true,
+                        aspectRatio: 2,
                         plugins: {
                             legend: {
-                                display: false
+                                display: true,
+                                position: 'top'
                             }
                         },
                         scales: {
                             y: {
-                                beginAtZero: true
+                                beginAtZero: true,
+                                ticks: {
+                                    stepSize: 1
+                                }
                             }
                         }
                     }
                 });
+                console.log('✅ Booking chart created');
+            } else {
+                console.error('❌ Booking chart canvas not found');
             }
 
             // Customer Activity Chart (Bar Chart)
             const activityCtx = document.getElementById('activityChart');
             if (activityCtx) {
-                new Chart(activityCtx, {
+                console.log('✅ Activity chart canvas found');
+                activityChart = new Chart(activityCtx, {
                     type: 'bar',
                     data: {
-                        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                        labels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
                         datasets: [{
-                            label: 'Active Users',
-                            data: [45, 52, 48, 68, 71, 85, 62],
+                            label: 'New Customers',
+                            data: [0, 0, 0, 0, 0, 0, 0],
                             backgroundColor: '#4CAF50',
                             borderRadius: 5
                         }]
                     },
                     options: {
                         responsive: true,
-                        maintainAspectRatio: false,
+                        maintainAspectRatio: true,
+                        aspectRatio: 2,
                         plugins: {
                             legend: {
-                                display: false
+                                display: true,
+                                position: 'top'
                             }
                         },
                         scales: {
                             y: {
-                                beginAtZero: true
+                                beginAtZero: true,
+                                ticks: {
+                                    stepSize: 1
+                                }
                             }
                         }
                     }
                 });
+                console.log('✅ Activity chart created');
+            } else {
+                console.error('❌ Activity chart canvas not found');
             }
 
             // Client Behavior Chart (Doughnut Chart)
             const behaviorCtx = document.getElementById('behaviorChart');
             if (behaviorCtx) {
-                new Chart(behaviorCtx, {
+                console.log('✅ Behavior chart canvas found');
+                behaviorChart = new Chart(behaviorCtx, {
                     type: 'doughnut',
                     data: {
-                        labels: ['New Visitors', 'Returning', 'Referrals'],
+                        labels: ['Pending', 'Active', 'Completed'],
                         datasets: [{
-                            data: [45, 35, 20],
+                            data: [0, 0, 0],
                             backgroundColor: [
+                                '#FFA726',
                                 '#2196F3',
-                                '#FF6B35',
                                 '#4CAF50'
                             ],
-                            borderWidth: 0
+                            borderWidth: 2,
+                            borderColor: '#fff'
                         }]
                     },
                     options: {
                         responsive: true,
-                        maintainAspectRatio: false,
+                        maintainAspectRatio: true,
+                        aspectRatio: 1.5,
                         plugins: {
                             legend: {
-                                position: 'bottom'
+                                position: 'bottom',
+                                labels: {
+                                    padding: 15,
+                                    font: {
+                                        size: 12
+                                    }
+                                }
                             }
                         }
                     }
                 });
+                console.log('✅ Behavior chart created');
+            } else {
+                console.error('❌ Behavior chart canvas not found');
             }
+
+            console.log('🎨 Chart initialization complete');
         }
 
         // Initialize charts when page loads
         window.addEventListener('DOMContentLoaded', initializeCharts);
+
+        // Quick Action Button Handlers
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all quick action buttons
+            const quickActionButtons = document.querySelectorAll('.quick-actions .action-btn');
+            
+            if (quickActionButtons.length >= 3) {
+                // New Booking button (first button)
+                quickActionButtons[0].addEventListener('click', function() {
+                    // Switch to bookings module
+                    document.querySelector('a[href="#bookings"]').click();
+                    // Open add booking modal after a short delay
+                    setTimeout(() => {
+                        const addBookingBtn = document.getElementById('addBookingBtn');
+                        if (addBookingBtn) {
+                            addBookingBtn.click();
+                        }
+                    }, 100);
+                });
+
+                // Add Customer button (second button)
+                quickActionButtons[1].addEventListener('click', function() {
+                    // Switch to customers module
+                    document.querySelector('a[href="#customers"]').click();
+                    // Open add customer modal after a short delay
+                    setTimeout(() => {
+                        const addCustomerBtn = document.getElementById('addCustomerBtn');
+                        if (addCustomerBtn) {
+                            addCustomerBtn.click();
+                        }
+                    }, 100);
+                });
+
+                // Newsletter button (third button)
+                quickActionButtons[2].addEventListener('click', function() {
+                    // Switch to newsletter module
+                    document.querySelector('a[href="#newsletter"]').click();
+                });
+            }
+        });
     </script>
 </body>
 </html>
