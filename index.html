@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naya Hotel Bondo - Luxury Accommodation</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="images/image.png" alt="Naya Hotel Bondo Logo" class="logo-image">
+                <span class="logo-text">NAYA HOTEL BONDO</span>
+            </div>
+            
+            <div class="nav-right">
+                <div class="social-icons social-icons-mobile">
+                    <a href="https://facebook.com" target="_blank" class="social-icon" aria-label="Facebook">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" class="social-icon" aria-label="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                    <a href="https://twitter.com" target="_blank" class="social-icon" aria-label="Twitter">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                    <a href="https://tiktok.com" target="_blank" class="social-icon" aria-label="TikTok">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="menu-toggle" id="mobile-menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link active">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#services" class="nav-link">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#restaurants" class="nav-link">Restaurants</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">Contact Us</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link btn-book">Book Now</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link btn-signin">Sign In</a>
+                </li>
+                <li class="nav-item social-icons-desktop">
+                    <div class="social-icons">
+                        <a href="https://facebook.com" target="_blank" class="social-icon" aria-label="Facebook">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </a>
+                        <a href="https://instagram.com" target="_blank" class="social-icon" aria-label="Instagram">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                        <a href="https://twitter.com" target="_blank" class="social-icon" aria-label="Twitter">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                            </svg>
+                        </a>
+                        <a href="https://tiktok.com" target="_blank" class="social-icon" aria-label="TikTok">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <!-- Background Image Slider -->
+        <div class="hero-slider">
+            <div class="hero-slide active" style="background-image: url('images/image.png');">
+                <div class="slide-overlay"></div>
+            </div>
+            <div class="hero-slide" style="background-image: url('images/image.png');">
+                <div class="slide-overlay"></div>
+            </div>
+            <div class="hero-slide" style="background-image: url('images/image.png');">
+                <div class="slide-overlay"></div>
+            </div>
+            <div class="hero-slide" style="background-image: url('images/image.png');">
+                <div class="slide-overlay"></div>
+            </div>
+        </div>
+
+        <!-- Hero Content -->
+        <div class="hero-content">
+            <h2 class="hero-title">Welcome to Naya Hotel Bondo</h2>
+            <div class="service-text">
+                <p class="service-name active" data-slide="0">Premium Accommodation</p>
+                <p class="service-name" data-slide="1">Luxury Rooms & Suites</p>
+                <p class="service-name" data-slide="2">Fine Dining Experience</p>
+                <p class="service-name" data-slide="3">Spa & Wellness</p>
+            </div>
+            <a href="#book" class="hero-btn">Book Your Stay</a>
+        </div>
+    </section>
+
+    <!-- Placeholder sections for other pages -->
+    <!-- About Us Section -->
+    <section id="about" class="about-section">
+        <div class="about-wrapper">
+            <div class="about-image-container">
+                <img src="images/image.png" alt="Naya Hotel Bondo">
+            </div>
+            <div class="about-content">
+                <h2>About Us</h2>
+                <h3>Welcome to Naya Hotel Bondo</h3>
+                <p>
+                    Naya Hotel Bondo is a premier destination for luxury accommodation and exceptional hospitality. 
+                    Nestled in the heart of Bondo, our hotel offers a perfect blend of modern comfort and elegant design.
+                </p>
+                <p>
+                    We pride ourselves on delivering world-class services, exquisite dining experiences, and 
+                    luxurious rooms that cater to both business and leisure travelers. Our dedicated team is 
+                    committed to making your stay memorable and comfortable.
+                </p>
+                <p>
+                    Experience the perfect combination of comfort, style, and exceptional service at Naya Hotel Bondo, 
+                    where every guest is treated like family.
+                </p>
+                <div class="about-buttons">
+                    <a href="#services" class="btn-primary">Learn More</a>
+                    <a href="#gallery" class="btn-secondary">View Gallery</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section services-section">
+        <div class="container">
+            <h2>Our Services</h2>
+            <p class="section-subtitle">Experience luxury and comfort with our premium services</p>
+            
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="images/image.png" alt="Luxury Accommodation">
+                    </div>
+                    <div class="service-info">
+                        <div class="service-header">
+                            <h3>Luxury Accommodation</h3>
+                            <a href="#book" class="btn-book-service">Book Now</a>
+                        </div>
+                        <p>Experience world-class comfort in our elegantly designed rooms and suites with modern amenities.</p>
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="images/image.png" alt="Fine Dining">
+                    </div>
+                    <div class="service-info">
+                        <div class="service-header">
+                            <h3>Fine Dining</h3>
+                            <a href="#book" class="btn-book-service">Book Now</a>
+                        </div>
+                        <p>Indulge in exquisite culinary experiences at our restaurants featuring local and international cuisine.</p>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="images/image.png" alt="Spa & Wellness">
+                    </div>
+                    <div class="service-info">
+                        <div class="service-header">
+                            <h3>Spa & Wellness</h3>
+                            <a href="#book" class="btn-book-service">Book Now</a>
+                        </div>
+                        <p>Rejuvenate your body and mind with our premium spa treatments and wellness programs.</p>
+                    </div>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="images/image.png" alt="Conference Facilities">
+                    </div>
+                    <div class="service-info">
+                        <div class="service-header">
+                            <h3>Conference Facilities</h3>
+                            <a href="#book" class="btn-book-service">Book Now</a>
+                        </div>
+                        <p>Host successful events in our state-of-the-art conference rooms equipped with modern technology.</p>
+                    </div>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="images/image.png" alt="Swimming Pool">
+                    </div>
+                    <div class="service-info">
+                        <div class="service-header">
+                            <h3>Swimming Pool</h3>
+                            <a href="#book" class="btn-book-service">Book Now</a>
+                        </div>
+                        <p>Relax and unwind in our pristine swimming pool with stunning views and poolside service.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Zoom Modal -->
+    <div class="image-modal" id="imageModal">
+        <span class="image-modal-close" id="modalClose">&times;</span>
+        <img id="modalImage" src="" alt="Zoomed Image">
+    </div>
+
+    <section id="restaurants" class="section restaurants-section">
+        <div class="container">
+            <h2>Restaurants & Dining</h2>
+            <p class="section-subtitle">Experience exceptional cuisine in an elegant atmosphere</p>
+            
+            <div class="restaurants-hero-slider">
+                <div class="restaurants-slider-container">
+                    <div class="restaurants-slide active">
+                        <img src="images/image.png" alt="Fine Dining Experience">
+                    </div>
+                    <div class="restaurants-slide">
+                        <img src="images/image.png" alt="Gourmet Cuisine">
+                    </div>
+                    <div class="restaurants-slide">
+                        <img src="images/image.png" alt="Delicious Meals">
+                    </div>
+                </div>
+                <div class="restaurants-slider-dots">
+                    <span class="slider-dot active" data-slide="0"></span>
+                    <span class="slider-dot" data-slide="1"></span>
+                    <span class="slider-dot" data-slide="2"></span>
+                </div>
+            </div>
+            
+            <div class="restaurants-content">
+                <p class="restaurants-description">
+                    At Naya Hotel Bondo, we pride ourselves on offering an unforgettable dining experience. 
+                    Our restaurants feature a diverse menu of local and international cuisines, prepared by our 
+                    expert chefs using the finest ingredients. Whether you're enjoying a casual breakfast, 
+                    business lunch, or romantic dinner, our elegant dining spaces provide the perfect ambiance 
+                    for every occasion.
+                </p>
+                
+                <div class="restaurants-cta">
+                    <a href="#book" class="btn-restaurants-book">Book Now</a>
+                    <a href="#rooms" class="btn-restaurants-rooms">View Our Rooms</a>
+                </div>
+                
+                <h3 class="amenities-title">Hotel Amenities</h3>
+                <div class="amenities-grid">
+                    <div class="amenity-item" style="background-image: url('images/image.png');">
+                        <div class="amenity-overlay"></div>
+                        <div class="amenity-label">Free WiFi</div>
+                    </div>
+                    
+                    <div class="amenity-item" style="background-image: url('images/image.png');">
+                        <div class="amenity-overlay"></div>
+                        <div class="amenity-label">24/7 Hot Water</div>
+                    </div>
+                    
+                    <div class="amenity-item" style="background-image: url('images/image.png');">
+                        <div class="amenity-overlay"></div>
+                        <div class="amenity-label">Luxury Bath</div>
+                    </div>
+                    
+                    <div class="amenity-item" style="background-image: url('images/image.png');">
+                        <div class="amenity-overlay"></div>
+                        <div class="amenity-label">Air Conditioning</div>
+                    </div>
+                    
+                    <div class="amenity-item" style="background-image: url('images/image.png');">
+                        <div class="amenity-overlay"></div>
+                        <div class="amenity-label">Room Service</div>
+                    </div>
+                    
+                    <div class="amenity-item" style="background-image: url('images/image.png');">
+                        <div class="amenity-overlay"></div>
+                        <div class="amenity-label">Free Parking</div>
+                    </div>
+                    
+                    <div class="amenity-item" style="background-image: url('images/image.png');">
+                        <div class="amenity-overlay"></div>
+                        <div class="amenity-label">Laundry Service</div>
+                    </div>
+                    
+                    <div class="amenity-item" style="background-image: url('images/image.png');">
+                        <div class="amenity-overlay"></div>
+                        <div class="amenity-label">Fitness Center</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section contact-section">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <p class="section-subtitle">We'd love to hear from you. Get in touch with us today!</p>
+            
+            <div class="contact-content">
+                <!-- Google Map -->
+                <div class="contact-map">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.123456789012!2d34.26359!3d-0.23451!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMMKwMTQnMDQuMiJTIDM0wrAxNSc0OC45IkU!5e0!3m2!1sen!2ske!4v1234567890123!5m2!1sen!2ske" 
+                        width="100%" 
+                        height="225" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="contact-form-wrapper">
+                    <h3>Send Us an Enquiry</h3>
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Full Name *</label>
+                                <input type="text" id="name" name="name" required placeholder="Enter your name">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" required placeholder="Enter your email">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject *</label>
+                                <input type="text" id="subject" name="subject" required placeholder="What is this about?">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" rows="6" required placeholder="Tell us more about your enquiry..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-submit-form">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>NAYA HOTEL BONDO</h3>
+                <p>Experience luxury and comfort at its finest. Your home away from home in the heart of Bondo.</p>
+                <div class="footer-social">
+                    <a href="#" aria-label="Facebook"><i>📘</i></a>
+                    <a href="#" aria-label="Instagram"><i>📷</i></a>
+                    <a href="#" aria-label="Twitter"><i>🐦</i></a>
+                    <a href="#" aria-label="LinkedIn"><i>💼</i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#restaurants">Restaurants</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Our Services</h4>
+                <ul class="footer-links">
+                    <li><a href="#services">Luxury Accommodation</a></li>
+                    <li><a href="#restaurants">Fine Dining</a></li>
+                    <li><a href="#services">Spa & Wellness</a></li>
+                    <li><a href="#services">Conference Facilities</a></li>
+                    <li><a href="#services">Swimming Pool</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Contact Info</h4>
+                <ul class="footer-contact">
+                    <li>📍 Bondo, Kenya</li>
+                    <li>📞 +254 XXX XXX XXX</li>
+                    <li>✉️ info@nayahotelbondo.com</li>
+                    <li>🕐 24/7 Reception</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 Naya Hotel Bondo. All rights reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy Policy</a>
+                <span>|</span>
+                <a href="#">Terms & Conditions</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
