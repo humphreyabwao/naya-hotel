@@ -1861,21 +1861,37 @@ body {
     }
 
     .footer-section {
-        text-align: center;
+        text-align: left;
+    }
+
+    .footer-section h3,
+    .footer-section h4,
+    .footer-section p {
+        text-align: left;
     }
 
     .footer-social {
-        justify-content: center;
+        justify-content: flex-start;
+    }
+
+    .footer-links,
+    .footer-contact {
+        text-align: left;
     }
 
     .footer-bottom {
         flex-direction: column;
-        text-align: center;
+        text-align: left;
+        align-items: flex-start;
         gap: 1rem;
     }
 
+    .footer-bottom p {
+        text-align: left;
+    }
+
     .footer-bottom-links {
-        justify-content: center;
+        justify-content: flex-start;
     }
 
     .image-modal img {
