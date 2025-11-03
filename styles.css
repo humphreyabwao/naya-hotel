@@ -784,7 +784,7 @@ body {
     display: flex;
     justify-content: center;
     gap: 1.5rem;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 
 .btn-restaurants-book {
@@ -799,6 +799,8 @@ body {
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
     letter-spacing: 0.5px;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .btn-restaurants-book:hover {
@@ -820,6 +822,8 @@ body {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     letter-spacing: 0.5px;
     border: 2px solid var(--primary-red);
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .btn-restaurants-rooms:hover {
@@ -1467,6 +1471,28 @@ body {
         font-size: 0.95rem;
         text-align: center;
     }
+    
+    /* Restaurant section on tablets */
+    .restaurants-hero-slider {
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+        margin-right: calc(-50vw + 50%);
+    }
+    
+    .restaurants-slider-container {
+        border-radius: 0;
+    }
+    
+    .restaurants-cta {
+        flex-wrap: nowrap;
+        gap: 1rem;
+    }
+    
+    .btn-restaurants-book,
+    .btn-restaurants-rooms {
+        padding: 0.9rem 2rem;
+        font-size: 1rem;
+    }
 }
 
 /* Extra small devices (phones, 600px and down) */
@@ -1693,25 +1719,42 @@ body {
     }
 
     .restaurants-description {
-        font-size: 1rem;
-        padding: 0 0.5rem;
+        font-size: 0.95rem;
+        padding: 0 1rem;
+        line-height: 1.6;
     }
 
     .restaurants-hero-slider {
-        width: auto;
-        margin-left: 2rem;
-        margin-right: 2rem;
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+        margin-right: calc(-50vw + 50%);
         margin-bottom: 2rem;
     }
 
     .restaurants-slider-container {
         height: 250px;
-        border-radius: 8px;
+        border-radius: 0;
     }
 
     .slider-dot {
         width: 10px;
         height: 10px;
+    }
+    
+    .restaurants-cta {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 0.8rem;
+        padding: 0 1rem;
+    }
+    
+    .btn-restaurants-book,
+    .btn-restaurants-rooms {
+        flex: 1;
+        padding: 0.8rem 1rem;
+        font-size: 0.85rem;
+        min-width: 0;
+        white-space: nowrap;
     }
     
     /* About section on small phones */
@@ -1888,5 +1931,32 @@ body {
     
     .service-header {
         gap: 0.5rem;
+    }
+    
+    /* Restaurant section on very small phones */
+    .restaurants-hero-slider {
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+        margin-right: calc(-50vw + 50%);
+    }
+    
+    .restaurants-slider-container {
+        height: 220px;
+    }
+    
+    .restaurants-description {
+        font-size: 0.9rem;
+        padding: 0 0.8rem;
+    }
+    
+    .restaurants-cta {
+        gap: 0.6rem;
+        padding: 0 0.8rem;
+    }
+    
+    .btn-restaurants-book,
+    .btn-restaurants-rooms {
+        padding: 0.7rem 0.8rem;
+        font-size: 0.75rem;
     }
 }
