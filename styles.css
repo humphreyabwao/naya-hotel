@@ -2038,3 +2038,240 @@ body {
         bottom: 10px;
     }
 }
+
+/* Reviews & Stats Section */
+.reviews-stats-section {
+    background: linear-gradient(135deg, var(--dark-red) 0%, var(--primary-red) 100%);
+    padding: 2rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.reviews-stats-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(255, 140, 97, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.reviews-stats-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* Reviews Slider */
+.reviews-slider {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.review-slide {
+    text-align: left;
+    color: var(--white);
+    padding: 0 1rem;
+    animation: fadeInOut 8s infinite;
+}
+
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0; transform: translateY(10px); }
+    10%, 90% { opacity: 1; transform: translateY(0); }
+}
+
+.stars {
+    color: #FFD700;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+}
+
+.review-text {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+    font-style: italic;
+    font-weight: 300;
+}
+
+.reviewer-name {
+    font-size: 0.75rem;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+/* Stats Container */
+.stats-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 1.5rem;
+}
+
+.stat-item {
+    text-align: center;
+    color: var(--white);
+    flex: 1;
+    padding: 0.5rem;
+    position: relative;
+}
+
+.stat-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: -0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 60%;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.stat-number {
+    display: inline-block;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+}
+
+.stat-decimal {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-left: 2px;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.7rem;
+    margin-top: 0.3rem;
+    opacity: 0.9;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Tablet Responsive */
+@media (max-width: 768px) {
+    .reviews-stats-section {
+        padding: 1.8rem 0;
+    }
+    
+    .reviews-stats-wrapper {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .review-slide {
+        text-align: center;
+        padding: 0 1.5rem;
+    }
+    
+    .review-text {
+        font-size: 0.8rem;
+    }
+    
+    .stats-container {
+        gap: 1rem;
+    }
+    
+    .stat-number {
+        font-size: 1.6rem;
+    }
+    
+    .stat-decimal {
+        font-size: 1.6rem;
+    }
+    
+    .stat-label {
+        font-size: 0.65rem;
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+    .reviews-stats-section {
+        padding: 1.5rem 0;
+    }
+    
+    .reviews-stats-wrapper {
+        gap: 1rem;
+    }
+    
+    .review-slide {
+        padding: 0 1rem;
+    }
+    
+    .stars {
+        font-size: 0.8rem;
+    }
+    
+    .review-text {
+        font-size: 0.75rem;
+        margin-bottom: 0.4rem;
+    }
+    
+    .reviewer-name {
+        font-size: 0.7rem;
+    }
+    
+    .stats-container {
+        gap: 0.8rem;
+        flex-wrap: nowrap;
+    }
+    
+    .stat-item {
+        padding: 0.3rem;
+    }
+    
+    .stat-number {
+        font-size: 1.4rem;
+    }
+    
+    .stat-decimal {
+        font-size: 1.4rem;
+    }
+    
+    .stat-label {
+        font-size: 0.6rem;
+        margin-top: 0.2rem;
+    }
+}
+
+/* Very Small Screens */
+@media (max-width: 360px) {
+    .reviews-stats-section {
+        padding: 1.2rem 0;
+    }
+    
+    .stats-container {
+        gap: 0.5rem;
+    }
+    
+    .stat-number {
+        font-size: 1.2rem;
+    }
+    
+    .stat-decimal {
+        font-size: 1.2rem;
+    }
+    
+    .stat-label {
+        font-size: 0.55rem;
+    }
+    
+    .review-text {
+        font-size: 0.7rem;
+    }
+}

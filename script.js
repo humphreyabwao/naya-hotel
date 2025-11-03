@@ -183,3 +183,82 @@ contactForm.addEventListener('submit', function(e) {
     // Reset form
     contactForm.reset();
 });
+
+// Automated Reviews Slider
+const reviews = [
+    {
+        text: "Exceptional service and beautiful rooms. Highly recommended!",
+        name: "Sarah M."
+    },
+    {
+        text: "The staff were incredibly welcoming and professional. Perfect stay!",
+        name: "John D."
+    },
+    {
+        text: "Amazing conference facilities and delicious restaurant food!",
+        name: "Patricia K."
+    },
+    {
+        text: "Best hotel experience in Bondo. Will definitely come back!",
+        name: "Michael O."
+    },
+    {
+        text: "Clean, comfortable, and great value for money. Five stars!",
+        name: "Grace A."
+    }
+];
+
+let currentReview = 0;
+
+function updateReview() {
+    const reviewSlide = document.querySelector('.review-slide');
+    if (reviewSlide) {
+        reviewSlide.style.animation = 'none';
+        setTimeout(() => {
+            reviewSlide.querySelector('.review-text').textContent = `"${reviews[currentReview].text}"`;
+            reviewSlide.querySelector('.reviewer-name').textContent = `- ${reviews[currentReview].name}`;
+            reviewSlide.style.animation = 'fadeInOut 8s';
+            currentReview = (currentReview + 1) % reviews.length;
+        }, 50);
+    }
+}
+
+// Change review every 8 seconds
+setInterval(updateReview, 8000);
+
+// Counter Animation
+function animateCounter(element, target, duration = 2000) {
+    const start = 0;
+    const increment = target / (duration / 16);
+    let current = 0;
+    
+    const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+            element.textContent = target;
+            clearInterval(timer);
+        } else {
+            element.textContent = Math.floor(current);
+        }
+    }, 16);
+}
+
+// Intersection Observer for Stats Counter
+const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const statNumbers = document.querySelectorAll('.stat-number');
+            statNumbers.forEach(stat => {
+                const target = parseInt(stat.getAttribute('data-target'));
+                animateCounter(stat, target);
+            });
+            statsObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.5 });
+
+// Observe the stats section when it loads
+const statsSection = document.querySelector('.reviews-stats-section');
+if (statsSection) {
+    statsObserver.observe(statsSection);
+}
