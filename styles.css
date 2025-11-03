@@ -1643,8 +1643,10 @@ body {
     }
 
     .hero-title {
-        font-size: 1.8rem;
+        font-size: 3rem;
         white-space: normal;
+        font-family: 'Anton', sans-serif;
+        letter-spacing: 1px;
     }
 
     .service-name {
@@ -1971,7 +1973,9 @@ body {
     }
     
     .hero-title {
-        font-size: 2rem;
+        font-size: 2.6rem;
+        font-family: 'Anton', sans-serif;
+        letter-spacing: 1px;
     }
     
     .nav-container {
@@ -2005,8 +2009,10 @@ body {
     }
     
     .hero-title {
-        font-size: 1.5rem;
+        font-size: 2.4rem;
         line-height: 1.3;
+        font-family: 'Anton', sans-serif;
+        letter-spacing: 1px;
     }
     
     .nav-right .social-icon {
