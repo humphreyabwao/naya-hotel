@@ -649,6 +649,19 @@
             font-size: 14px;
             color: #333;
             white-space: nowrap;
+            vertical-align: middle;
+        }
+
+        /* Allow wrapping for services column only */
+        .customer-table td:has(.services-container) {
+            white-space: normal;
+            vertical-align: top;
+        }
+
+        /* Ensure actions column stays horizontal */
+        .customer-table td:has(.action-buttons) {
+            white-space: nowrap;
+            min-width: 380px;
         }
 
         .customer-table tbody tr {
@@ -1106,6 +1119,189 @@
             background: #6c757d;
             color: white;
         }
+
+        /* Customer Status Badges */
+        .status-badge.pending {
+            background: #ffc107;
+            color: #212529;
+        }
+
+        .status-badge.completed {
+            background: #28a745;
+            color: white;
+        }
+
+        .status-badge.cancelled {
+            background: #dc3545;
+            color: white;
+        }
+
+        /* Services Section Styles */
+        #servicesContainer {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .service-item {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .service-select {
+            flex: 1;
+        }
+
+        .btn-remove-service {
+            padding: 8px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            width: 36px;
+            height: 36px;
+        }
+
+        .btn-remove-service:hover {
+            background: #c82333;
+            transform: scale(1.05);
+        }
+
+        .btn-add-service {
+            padding: 10px 15px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            width: fit-content;
+        }
+
+        .btn-add-service:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+
+        /* Action Buttons in Table */
+        .action-buttons {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            justify-content: flex-start;
+            flex-wrap: nowrap;
+            white-space: nowrap;
+        }
+
+        .action-btn-table {
+            padding: 5px 8px;
+            border: none;
+            border-radius: 5px;
+            font-size: 11px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .action-btn-table svg {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
+        }
+
+        .action-btn-table.view {
+            background: #17a2b8;
+            color: white;
+        }
+
+        .action-btn-table.view:hover {
+            background: #138496;
+            transform: translateY(-2px);
+        }
+
+        .action-btn-table.edit {
+            background: #ffc107;
+            color: #212529;
+        }
+
+        .action-btn-table.edit:hover {
+            background: #e0a800;
+            transform: translateY(-2px);
+        }
+
+        .action-btn-table.complete {
+            background: #28a745;
+            color: white;
+        }
+
+        .action-btn-table.complete:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+
+        .action-btn-table.delete {
+            background: #dc3545;
+            color: white;
+        }
+
+        .action-btn-table.delete:hover {
+            background: #c82333;
+            transform: translateY(-2px);
+        }
+
+        /* Services Badge Display */
+        .services-badge {
+            display: block;
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 500;
+            margin: 3px 0;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        .services-container {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            max-width: 200px;
+            align-items: flex-start;
+            padding: 2px 0;
+        }
+
+        /* Ensure services cell displays vertically */
+        .customer-table tbody tr td:nth-child(4) {
+            white-space: normal;
+            vertical-align: top;
+            padding-top: 15px;
+        }
+
+        /* Ensure actions column stays horizontal (9th column) */
+        .customer-table tbody tr td:nth-child(9) {
+            white-space: nowrap;
+            min-width: 380px;
+            vertical-align: middle;
+        }
     </style>
 </head>
 <body>
@@ -1329,8 +1525,10 @@
                         </div>
                         <select class="filter-select" id="customerFilter">
                             <option value="all">All Customers</option>
-                            <option value="active">Active</option>
-                            <option value="inactive">Inactive</option>
+                            <option value="pending">Pending</option>
+                            <option value="completed">Completed</option>
+                            <option value="in-progress">In Progress</option>
+                            <option value="cancelled">Cancelled</option>
                         </select>
                     </div>
                     <button class="add-customer-btn" id="addCustomerBtn">
@@ -1345,17 +1543,20 @@
                     <table class="customer-table">
                         <thead>
                             <tr>
-                                <th>Customer</th>
+                                <th>Customer Name</th>
+                                <th>Email</th>
                                 <th>Phone</th>
-                                <th>Bookings</th>
+                                <th>Services</th>
+                                <th>Amount Paid</th>
+                                <th>Check-In</th>
+                                <th>Check-Out</th>
                                 <th>Status</th>
-                                <th>Joined</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody id="customersTableBody">
                             <tr>
-                                <td colspan="6" class="no-data">No customers found</td>
+                                <td colspan="9" class="no-data">No customers found</td>
                             </tr>
                         </tbody>
                     </table>
@@ -1529,7 +1730,7 @@
 
     <!-- Add Customer Modal -->
     <div class="modal-overlay" id="addCustomerModal">
-        <div class="modal-content">
+        <div class="modal-content" style="max-width: 700px;">
             <div class="modal-header">
                 <h2 class="modal-title">Add New Customer</h2>
                 <button class="modal-close" id="closeModal">
@@ -1552,11 +1753,72 @@
                         <label class="form-label" for="customerPhone">Phone Number *</label>
                         <input type="tel" id="customerPhone" class="form-input" placeholder="+254 700 000 000" required>
                     </div>
+                    
+                    <!-- Services Section -->
                     <div class="form-group">
-                        <label class="form-label" for="customerStatus">Status</label>
-                        <select id="customerStatus" class="form-select">
-                            <option value="active">Active</option>
-                            <option value="inactive">Inactive</option>
+                        <label class="form-label">Services *</label>
+                        <div id="servicesContainer">
+                            <div class="service-item">
+                                <select class="form-select service-select" required>
+                                    <option value="">Select a service</option>
+                                    <option value="Room Booking">Room Booking</option>
+                                    <option value="Restaurant">Restaurant</option>
+                                    <option value="Bar Services">Bar Services</option>
+                                    <option value="Conference Hall">Conference Hall</option>
+                                    <option value="Event Space">Event Space</option>
+                                    <option value="Catering">Catering</option>
+                                    <option value="Laundry">Laundry</option>
+                                    <option value="Spa & Wellness">Spa & Wellness</option>
+                                    <option value="Airport Transfer">Airport Transfer</option>
+                                    <option value="Tour Guide">Tour Guide</option>
+                                </select>
+                                <button type="button" class="btn-remove-service" style="display: none;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">
+                                        <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-add-service" id="addServiceBtn">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16">
+                                <path fill="currentColor" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                            </svg>
+                            Add Another Service
+                        </button>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="amountPaid">Amount Paid (KSH) *</label>
+                        <input type="number" id="amountPaid" class="form-input" placeholder="0.00" min="0" step="0.01" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="checkInDate">Check-In Date *</label>
+                        <input type="date" id="checkInDate" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="checkInTime">Check-In Time *</label>
+                        <input type="time" id="checkInTime" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="checkOutDate">Check-Out Date *</label>
+                        <input type="date" id="checkOutDate" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="checkOutTime">Check-Out Time *</label>
+                        <input type="time" id="checkOutTime" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="customerStatus">Status *</label>
+                        <select id="customerStatus" class="form-select" required>
+                            <option value="pending">Pending</option>
+                            <option value="in-progress">In Progress</option>
+                            <option value="completed">Completed</option>
+                            <option value="cancelled">Cancelled</option>
                         </select>
                     </div>
                 </div>
@@ -1691,6 +1953,146 @@
         </div>
     </div>
 
+    <!-- View Customer Modal -->
+    <div class="modal-overlay" id="viewCustomerModal">
+        <div class="modal-content" style="max-width: 700px;">
+            <div class="modal-header">
+                <h2 class="modal-title">Customer Details</h2>
+                <button class="modal-close" id="closeViewCustomerModal">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="enquiry-details-content">
+                    <div class="detail-row">
+                        <strong>Customer Name:</strong>
+                        <span id="viewCustomerName">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <strong>Email:</strong>
+                        <span id="viewCustomerEmail">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <strong>Phone:</strong>
+                        <span id="viewCustomerPhone">-</span>
+                    </div>
+                    <div class="detail-row full-width">
+                        <strong>Services:</strong>
+                        <div id="viewCustomerServices" class="services-container">-</div>
+                    </div>
+                    <div class="detail-row">
+                        <strong>Amount Paid:</strong>
+                        <span id="viewCustomerAmount">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <strong>Check-In:</strong>
+                        <span id="viewCustomerCheckIn">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <strong>Check-Out:</strong>
+                        <span id="viewCustomerCheckOut">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <strong>Status:</strong>
+                        <span id="viewCustomerStatus">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <strong>Created At:</strong>
+                        <span id="viewCustomerCreated">-</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-cancel" id="cancelViewCustomerModal">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Customer Modal -->
+    <div class="modal-overlay" id="editCustomerModal">
+        <div class="modal-content" style="max-width: 700px;">
+            <div class="modal-header">
+                <h2 class="modal-title">Edit Customer</h2>
+                <button class="modal-close" id="closeEditCustomerModal">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                </button>
+            </div>
+            <form id="editCustomerForm">
+                <input type="hidden" id="editCustomerId">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="form-label" for="editCustomerName">Full Name *</label>
+                        <input type="text" id="editCustomerName" class="form-input" placeholder="Enter customer name" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="editCustomerEmail">Email Address *</label>
+                        <input type="email" id="editCustomerEmail" class="form-input" placeholder="customer@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="editCustomerPhone">Phone Number *</label>
+                        <input type="tel" id="editCustomerPhone" class="form-input" placeholder="+254 700 000 000" required>
+                    </div>
+                    
+                    <!-- Services Section -->
+                    <div class="form-group">
+                        <label class="form-label">Services *</label>
+                        <div id="editServicesContainer">
+                        </div>
+                        <button type="button" class="btn-add-service" id="editAddServiceBtn">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16">
+                                <path fill="currentColor" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                            </svg>
+                            Add Another Service
+                        </button>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="editAmountPaid">Amount Paid (KSH) *</label>
+                        <input type="number" id="editAmountPaid" class="form-input" placeholder="0.00" min="0" step="0.01" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="editCheckInDate">Check-In Date *</label>
+                        <input type="date" id="editCheckInDate" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="editCheckInTime">Check-In Time *</label>
+                        <input type="time" id="editCheckInTime" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="editCheckOutDate">Check-Out Date *</label>
+                        <input type="date" id="editCheckOutDate" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="editCheckOutTime">Check-Out Time *</label>
+                        <input type="time" id="editCheckOutTime" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="editCustomerStatus">Status *</label>
+                        <select id="editCustomerStatus" class="form-select" required>
+                            <option value="pending">Pending</option>
+                            <option value="in-progress">In Progress</option>
+                            <option value="completed">Completed</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-cancel" id="cancelEditCustomerModal">Cancel</button>
+                    <button type="submit" class="btn-submit">Update Customer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script type="module">
         // Firebase Configuration and Initialization
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -1726,42 +2128,68 @@
                         tableBody.innerHTML += row;
                     });
                 } else {
-                    tableBody.innerHTML = '<tr><td colspan="6" class="no-data">No customers found</td></tr>';
+                    tableBody.innerHTML = '<tr><td colspan="9" class="no-data">No customers found</td></tr>';
                 }
             });
         }
 
         // Create customer table row
         function createCustomerRow(id, customer) {
-            const initial = customer.name ? customer.name.charAt(0).toUpperCase() : 'C';
-            const statusClass = customer.status === 'active' ? 'active' : 'inactive';
+            const statusClass = customer.status || 'pending';
+            
+            // Format services
+            const services = customer.services || [];
+            const servicesHtml = services.length > 0 
+                ? services.map(s => `<span class="services-badge">${s}</span>`).join('')
+                : '<span style="color: #999;">No services</span>';
+            
+            // Format dates
+            const checkIn = customer.checkInDate && customer.checkInTime 
+                ? `${customer.checkInDate} ${customer.checkInTime}` 
+                : 'N/A';
+            const checkOut = customer.checkOutDate && customer.checkOutTime 
+                ? `${customer.checkOutDate} ${customer.checkOutTime}` 
+                : 'N/A';
             
             return `
                 <tr data-customer-id="${id}">
+                    <td>${customer.name || 'N/A'}</td>
+                    <td>${customer.email || 'N/A'}</td>
+                    <td>${customer.phone || 'N/A'}</td>
                     <td>
-                        <div class="customer-info">
-                            <div class="customer-avatar">${initial}</div>
-                            <div>
-                                <div class="customer-name">${customer.name || 'N/A'}</div>
-                                <div class="customer-email">${customer.email || 'N/A'}</div>
-                            </div>
+                        <div class="services-container">
+                            ${servicesHtml}
                         </div>
                     </td>
-                    <td>${customer.phone || 'N/A'}</td>
-                    <td>${customer.bookings || 0}</td>
-                    <td><span class="status-badge ${statusClass}">${customer.status || 'active'}</span></td>
-                    <td>${customer.joined || 'N/A'}</td>
+                    <td>KSH ${parseFloat(customer.amountPaid || 0).toLocaleString()}</td>
+                    <td>${checkIn}</td>
+                    <td>${checkOut}</td>
+                    <td><span class="status-badge ${statusClass}">${statusClass.charAt(0).toUpperCase() + statusClass.slice(1)}</span></td>
                     <td>
                         <div class="action-buttons">
-                            <button class="action-icon-btn edit-btn" data-id="${id}">
+                            <button class="action-btn-table view" data-id="${id}" onclick="viewCustomer('${id}')">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                                </svg>
+                                View
+                            </button>
+                            <button class="action-btn-table edit" data-id="${id}" onclick="editCustomer('${id}')">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                     <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
                                 </svg>
+                                Edit
                             </button>
-                            <button class="action-icon-btn delete-btn" data-id="${id}">
+                            <button class="action-btn-table complete" data-id="${id}" onclick="completeCustomer('${id}')">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                                </svg>
+                                Complete
+                            </button>
+                            <button class="action-btn-table delete" data-id="${id}" onclick="deleteCustomer('${id}')">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                     <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
                                 </svg>
+                                Delete
                             </button>
                         </div>
                     </td>
@@ -1782,7 +2210,7 @@
 
         // Filter functionality
         document.getElementById('customerFilter')?.addEventListener('change', function(e) {
-            const filterValue = e.target.value;
+            const filterValue = e.target.value.toLowerCase();
             const rows = document.querySelectorAll('#customersTableBody tr');
             
             rows.forEach(row => {
@@ -1791,7 +2219,8 @@
                 } else {
                     const status = row.querySelector('.status-badge');
                     if (status) {
-                        row.style.display = status.classList.contains(filterValue) ? '' : 'none';
+                        const statusText = status.textContent.toLowerCase();
+                        row.style.display = statusText === filterValue ? '' : 'none';
                     }
                 }
             });
@@ -1831,7 +2260,20 @@
             const name = document.getElementById('customerName').value;
             const email = document.getElementById('customerEmail').value;
             const phone = document.getElementById('customerPhone').value;
+            const amountPaid = document.getElementById('amountPaid').value;
+            const checkInDate = document.getElementById('checkInDate').value;
+            const checkInTime = document.getElementById('checkInTime').value;
+            const checkOutDate = document.getElementById('checkOutDate').value;
+            const checkOutTime = document.getElementById('checkOutTime').value;
             const status = document.getElementById('customerStatus').value;
+            
+            // Collect all selected services
+            const services = [];
+            document.querySelectorAll('#servicesContainer .service-select').forEach(select => {
+                if (select.value) {
+                    services.push(select.value);
+                }
+            });
             
             const customersRef = ref(database, 'customers');
             const newCustomerRef = push(customersRef);
@@ -1840,34 +2282,315 @@
                 name: name,
                 email: email,
                 phone: phone,
-                bookings: 0,
+                services: services,
+                amountPaid: parseFloat(amountPaid),
+                checkInDate: checkInDate,
+                checkInTime: checkInTime,
+                checkOutDate: checkOutDate,
+                checkOutTime: checkOutTime,
                 status: status,
-                joined: new Date().toLocaleDateString()
+                createdAt: new Date().toISOString()
             }).then(() => {
                 // Close modal and reset form
                 document.getElementById('addCustomerModal').classList.remove('show');
                 document.getElementById('addCustomerForm').reset();
+                // Reset services container to one service
+                document.getElementById('servicesContainer').innerHTML = `
+                    <div class="service-item">
+                        <select class="form-select service-select" required>
+                            <option value="">Select a service</option>
+                            <option value="Room Booking">Room Booking</option>
+                            <option value="Restaurant">Restaurant</option>
+                            <option value="Bar Services">Bar Services</option>
+                            <option value="Conference Hall">Conference Hall</option>
+                            <option value="Event Space">Event Space</option>
+                            <option value="Catering">Catering</option>
+                            <option value="Laundry">Laundry</option>
+                            <option value="Spa & Wellness">Spa & Wellness</option>
+                            <option value="Airport Transfer">Airport Transfer</option>
+                            <option value="Tour Guide">Tour Guide</option>
+                        </select>
+                        <button type="button" class="btn-remove-service" style="display: none;">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">
+                                <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                            </svg>
+                        </button>
+                    </div>
+                `;
                 alert('Customer added successfully!');
             }).catch((error) => {
                 alert('Error adding customer: ' + error.message);
             });
         });
 
-        // Delete customer
+        // Add Service Button Handler
+        document.getElementById('addServiceBtn')?.addEventListener('click', function() {
+            const container = document.getElementById('servicesContainer');
+            const serviceItem = document.createElement('div');
+            serviceItem.className = 'service-item';
+            serviceItem.innerHTML = `
+                <select class="form-select service-select" required>
+                    <option value="">Select a service</option>
+                    <option value="Room Booking">Room Booking</option>
+                    <option value="Restaurant">Restaurant</option>
+                    <option value="Bar Services">Bar Services</option>
+                    <option value="Conference Hall">Conference Hall</option>
+                    <option value="Event Space">Event Space</option>
+                    <option value="Catering">Catering</option>
+                    <option value="Laundry">Laundry</option>
+                    <option value="Spa & Wellness">Spa & Wellness</option>
+                    <option value="Airport Transfer">Airport Transfer</option>
+                    <option value="Tour Guide">Tour Guide</option>
+                </select>
+                <button type="button" class="btn-remove-service">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">
+                        <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                </button>
+            `;
+            container.appendChild(serviceItem);
+            updateRemoveButtons();
+        });
+
+        // Remove Service Button Handler (Event Delegation)
         document.addEventListener('click', function(e) {
-            if (e.target.closest('.delete-btn')) {
-                const btn = e.target.closest('.delete-btn');
-                const customerId = btn.getAttribute('data-id');
-                
-                if (confirm('Are you sure you want to delete this customer?')) {
-                    const customerRef = ref(database, 'customers/' + customerId);
-                    remove(customerRef).then(() => {
-                        alert('Customer deleted successfully!');
-                    }).catch((error) => {
-                        alert('Error deleting customer: ' + error.message);
-                    });
-                }
+            if (e.target.closest('.btn-remove-service')) {
+                const serviceItem = e.target.closest('.service-item');
+                serviceItem.remove();
+                updateRemoveButtons();
             }
+        });
+
+        // Update visibility of remove buttons
+        function updateRemoveButtons() {
+            const services = document.querySelectorAll('#servicesContainer .service-item');
+            services.forEach((item, index) => {
+                const removeBtn = item.querySelector('.btn-remove-service');
+                if (services.length === 1) {
+                    removeBtn.style.display = 'none';
+                } else {
+                    removeBtn.style.display = 'flex';
+                }
+            });
+        }
+
+        // Edit Service Management for Edit Modal
+        document.getElementById('editAddServiceBtn')?.addEventListener('click', function() {
+            const container = document.getElementById('editServicesContainer');
+            const serviceItem = document.createElement('div');
+            serviceItem.className = 'service-item';
+            serviceItem.innerHTML = `
+                <select class="form-select service-select" required>
+                    <option value="">Select a service</option>
+                    <option value="Room Booking">Room Booking</option>
+                    <option value="Restaurant">Restaurant</option>
+                    <option value="Bar Services">Bar Services</option>
+                    <option value="Conference Hall">Conference Hall</option>
+                    <option value="Event Space">Event Space</option>
+                    <option value="Catering">Catering</option>
+                    <option value="Laundry">Laundry</option>
+                    <option value="Spa & Wellness">Spa & Wellness</option>
+                    <option value="Airport Transfer">Airport Transfer</option>
+                    <option value="Tour Guide">Tour Guide</option>
+                </select>
+                <button type="button" class="btn-remove-service">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">
+                        <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                </button>
+            `;
+            container.appendChild(serviceItem);
+            updateEditRemoveButtons();
+        });
+
+        function updateEditRemoveButtons() {
+            const services = document.querySelectorAll('#editServicesContainer .service-item');
+            services.forEach((item, index) => {
+                const removeBtn = item.querySelector('.btn-remove-service');
+                if (services.length === 1) {
+                    removeBtn.style.display = 'none';
+                } else {
+                    removeBtn.style.display = 'flex';
+                }
+            });
+        }
+
+        // View Customer Function
+        window.viewCustomer = function(customerId) {
+            const customerRef = ref(database, 'customers/' + customerId);
+            onValue(customerRef, (snapshot) => {
+                if (snapshot.exists()) {
+                    const customer = snapshot.val();
+                    
+                    document.getElementById('viewCustomerName').textContent = customer.name || 'N/A';
+                    document.getElementById('viewCustomerEmail').textContent = customer.email || 'N/A';
+                    document.getElementById('viewCustomerPhone').textContent = customer.phone || 'N/A';
+                    
+                    // Display services
+                    const servicesContainer = document.getElementById('viewCustomerServices');
+                    if (customer.services && customer.services.length > 0) {
+                        servicesContainer.innerHTML = customer.services.map(s => 
+                            `<span class="services-badge">${s}</span>`
+                        ).join('');
+                    } else {
+                        servicesContainer.innerHTML = '<span style="color: #999;">No services</span>';
+                    }
+                    
+                    document.getElementById('viewCustomerAmount').textContent = `KSH ${parseFloat(customer.amountPaid || 0).toLocaleString()}`;
+                    document.getElementById('viewCustomerCheckIn').textContent = 
+                        `${customer.checkInDate || 'N/A'} ${customer.checkInTime || ''}`;
+                    document.getElementById('viewCustomerCheckOut').textContent = 
+                        `${customer.checkOutDate || 'N/A'} ${customer.checkOutTime || ''}`;
+                    
+                    const statusBadge = `<span class="status-badge ${customer.status}">${customer.status ? customer.status.charAt(0).toUpperCase() + customer.status.slice(1) : 'N/A'}</span>`;
+                    document.getElementById('viewCustomerStatus').innerHTML = statusBadge;
+                    document.getElementById('viewCustomerCreated').textContent = 
+                        customer.createdAt ? new Date(customer.createdAt).toLocaleString() : 'N/A';
+                    
+                    document.getElementById('viewCustomerModal').classList.add('show');
+                }
+            }, { onlyOnce: true });
+        };
+
+        // Edit Customer Function
+        window.editCustomer = function(customerId) {
+            const customerRef = ref(database, 'customers/' + customerId);
+            onValue(customerRef, (snapshot) => {
+                if (snapshot.exists()) {
+                    const customer = snapshot.val();
+                    
+                    document.getElementById('editCustomerId').value = customerId;
+                    document.getElementById('editCustomerName').value = customer.name || '';
+                    document.getElementById('editCustomerEmail').value = customer.email || '';
+                    document.getElementById('editCustomerPhone').value = customer.phone || '';
+                    document.getElementById('editAmountPaid').value = customer.amountPaid || '';
+                    document.getElementById('editCheckInDate').value = customer.checkInDate || '';
+                    document.getElementById('editCheckInTime').value = customer.checkInTime || '';
+                    document.getElementById('editCheckOutDate').value = customer.checkOutDate || '';
+                    document.getElementById('editCheckOutTime').value = customer.checkOutTime || '';
+                    document.getElementById('editCustomerStatus').value = customer.status || 'pending';
+                    
+                    // Populate services
+                    const servicesContainer = document.getElementById('editServicesContainer');
+                    servicesContainer.innerHTML = '';
+                    
+                    const services = customer.services || [''];
+                    services.forEach((service, index) => {
+                        const serviceItem = document.createElement('div');
+                        serviceItem.className = 'service-item';
+                        serviceItem.innerHTML = `
+                            <select class="form-select service-select" required>
+                                <option value="">Select a service</option>
+                                <option value="Room Booking" ${service === 'Room Booking' ? 'selected' : ''}>Room Booking</option>
+                                <option value="Restaurant" ${service === 'Restaurant' ? 'selected' : ''}>Restaurant</option>
+                                <option value="Bar Services" ${service === 'Bar Services' ? 'selected' : ''}>Bar Services</option>
+                                <option value="Conference Hall" ${service === 'Conference Hall' ? 'selected' : ''}>Conference Hall</option>
+                                <option value="Event Space" ${service === 'Event Space' ? 'selected' : ''}>Event Space</option>
+                                <option value="Catering" ${service === 'Catering' ? 'selected' : ''}>Catering</option>
+                                <option value="Laundry" ${service === 'Laundry' ? 'selected' : ''}>Laundry</option>
+                                <option value="Spa & Wellness" ${service === 'Spa & Wellness' ? 'selected' : ''}>Spa & Wellness</option>
+                                <option value="Airport Transfer" ${service === 'Airport Transfer' ? 'selected' : ''}>Airport Transfer</option>
+                                <option value="Tour Guide" ${service === 'Tour Guide' ? 'selected' : ''}>Tour Guide</option>
+                            </select>
+                            <button type="button" class="btn-remove-service" style="display: ${services.length === 1 ? 'none' : 'flex'};">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">
+                                    <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                                </svg>
+                            </button>
+                        `;
+                        servicesContainer.appendChild(serviceItem);
+                    });
+                    
+                    document.getElementById('editCustomerModal').classList.add('show');
+                }
+            }, { onlyOnce: true });
+        };
+
+        // Complete Customer Function
+        window.completeCustomer = function(customerId) {
+            if (confirm('Mark this customer as completed?')) {
+                const customerRef = ref(database, 'customers/' + customerId);
+                set(customerRef.child('status'), 'completed').then(() => {
+                    alert('Customer marked as completed!');
+                }).catch((error) => {
+                    alert('Error updating status: ' + error.message);
+                });
+            }
+        };
+
+        // Delete Customer Function
+        window.deleteCustomer = function(customerId) {
+            if (confirm('Are you sure you want to delete this customer? This action cannot be undone.')) {
+                const customerRef = ref(database, 'customers/' + customerId);
+                remove(customerRef).then(() => {
+                    alert('Customer deleted successfully!');
+                }).catch((error) => {
+                    alert('Error deleting customer: ' + error.message);
+                });
+            }
+        };
+
+        // Close View Customer Modal
+        document.getElementById('closeViewCustomerModal')?.addEventListener('click', function() {
+            document.getElementById('viewCustomerModal').classList.remove('show');
+        });
+
+        document.getElementById('cancelViewCustomerModal')?.addEventListener('click', function() {
+            document.getElementById('viewCustomerModal').classList.remove('show');
+        });
+
+        // Close Edit Customer Modal
+        document.getElementById('closeEditCustomerModal')?.addEventListener('click', function() {
+            document.getElementById('editCustomerModal').classList.remove('show');
+        });
+
+        document.getElementById('cancelEditCustomerModal')?.addEventListener('click', function() {
+            document.getElementById('editCustomerModal').classList.remove('show');
+        });
+
+        // Handle Edit Customer Form Submission
+        document.getElementById('editCustomerForm')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const customerId = document.getElementById('editCustomerId').value;
+            const name = document.getElementById('editCustomerName').value;
+            const email = document.getElementById('editCustomerEmail').value;
+            const phone = document.getElementById('editCustomerPhone').value;
+            const amountPaid = document.getElementById('editAmountPaid').value;
+            const checkInDate = document.getElementById('editCheckInDate').value;
+            const checkInTime = document.getElementById('editCheckInTime').value;
+            const checkOutDate = document.getElementById('editCheckOutDate').value;
+            const checkOutTime = document.getElementById('editCheckOutTime').value;
+            const status = document.getElementById('editCustomerStatus').value;
+            
+            // Collect all selected services
+            const services = [];
+            document.querySelectorAll('#editServicesContainer .service-select').forEach(select => {
+                if (select.value) {
+                    services.push(select.value);
+                }
+            });
+            
+            const customerRef = ref(database, 'customers/' + customerId);
+            
+            set(customerRef, {
+                name: name,
+                email: email,
+                phone: phone,
+                services: services,
+                amountPaid: parseFloat(amountPaid),
+                checkInDate: checkInDate,
+                checkInTime: checkInTime,
+                checkOutDate: checkOutDate,
+                checkOutTime: checkOutTime,
+                status: status,
+                updatedAt: new Date().toISOString()
+            }).then(() => {
+                document.getElementById('editCustomerModal').classList.remove('show');
+                alert('Customer updated successfully!');
+            }).catch((error) => {
+                alert('Error updating customer: ' + error.message);
+            });
         });
 
         // Make loadCustomers available globally

@@ -1,0 +1,20 @@
+{
+  "rules": {
+    "bookings": {
+      ".read": true,
+      ".write": true
+    },
+    "customers": {
+      ".read": true,
+      ".write": true
+    },
+    "newsletter-subscribers": {
+      ".read": true,
+      ".write": true
+    },
+    "contact-enquiries": {
+      ".read": true,
+      ".write": true
+    }
+  }
+}

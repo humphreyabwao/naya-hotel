@@ -1,0 +1,44 @@
+====================================
+ FIREBASE RULES - QUICK COPY/PASTE
+====================================
+
+Copy everything below and paste it into your Firebase Console:
+Firebase Console > Realtime Database > Rules tab
+
+Then click "Publish"
+
+------------------------------------
+
+{
+  "rules": {
+    "bookings": {
+      ".read": true,
+      ".write": true
+    },
+    "customers": {
+      ".read": true,
+      ".write": true
+    },
+    "newsletter-subscribers": {
+      ".read": true,
+      ".write": true
+    },
+    "contact-enquiries": {
+      ".read": true,
+      ".write": true
+    }
+  }
+}
+
+------------------------------------
+
+STEPS:
+1. Go to: https://console.firebase.google.com/
+2. Select project: naya-elite-hotel
+3. Click: Realtime Database (left sidebar)
+4. Click: Rules (top tab)
+5. Paste the rules above
+6. Click: Publish
+7. Test your customer modal!
+
+====================================
