@@ -1472,6 +1472,58 @@
                     </table>
                 </div>
             </div>
+
+            <!-- Newsletter Module -->
+            <div id="newsletterModule" style="display: none;">
+                <div class="module-header">
+                    <div class="search-filter-container">
+                        <div class="search-box">
+                            <input type="text" id="newsletterSearch" placeholder="Search subscribers...">
+                            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                            </svg>
+                        </div>
+                        <select id="newsletterFilter" class="filter-select">
+                            <option value="all">All Status</option>
+                            <option value="active">Active</option>
+                            <option value="unsubscribed">Unsubscribed</option>
+                        </select>
+                    </div>
+                    <div class="stats-summary">
+                        <div class="stat-summary-item">
+                            <span class="stat-number" id="totalSubscribers">0</span>
+                            <span class="stat-text">Total</span>
+                        </div>
+                        <div class="stat-summary-item">
+                            <span class="stat-number" id="activeSubscribers">0</span>
+                            <span class="stat-text">Active</span>
+                        </div>
+                        <div class="stat-summary-item">
+                            <span class="stat-number" id="todaySubscribers">0</span>
+                            <span class="stat-text">Today</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table class="customer-table">
+                        <thead>
+                            <tr>
+                                <th>Subscriber ID</th>
+                                <th>Email Address</th>
+                                <th>Status</th>
+                                <th>Subscribed Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="newsletterTableBody">
+                            <tr>
+                                <td colspan="5" class="no-data">No subscribers found</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -2222,6 +2274,204 @@
         console.log('📊 loadEnquiries function:', typeof window.loadEnquiries);
         console.log('🔍 enquiriesModule element:', document.getElementById('enquiriesModule'));
 
+        // ===== NEWSLETTER MANAGEMENT =====
+        
+        // Real-time newsletter subscribers data listener
+        function loadNewsletterSubscribers() {
+            const subscribersRef = ref(database, 'newsletter-subscribers');
+            onValue(subscribersRef, (snapshot) => {
+                const tableBody = document.getElementById('newsletterTableBody');
+                const totalSubscribers = document.getElementById('totalSubscribers');
+                const activeSubscribers = document.getElementById('activeSubscribers');
+                const todaySubscribers = document.getElementById('todaySubscribers');
+                
+                tableBody.innerHTML = '';
+                
+                let counts = { total: 0, active: 0, today: 0 };
+                const today = new Date().toDateString();
+
+                if (snapshot.exists()) {
+                    const subscribers = snapshot.val();
+                    const subscribersArray = Object.keys(subscribers).map(key => ({
+                        id: key,
+                        ...subscribers[key]
+                    }));
+
+                    // Sort by subscription date (newest first)
+                    subscribersArray.sort((a, b) => new Date(b.subscribedAt) - new Date(a.subscribedAt));
+
+                    subscribersArray.forEach(subscriber => {
+                        counts.total++;
+                        if (subscriber.status === 'active' || !subscriber.status) counts.active++;
+                        
+                        // Check if subscribed today
+                        const subDate = new Date(subscriber.subscribedAt).toDateString();
+                        if (subDate === today) counts.today++;
+                        
+                        const row = createSubscriberRow(subscriber.id, subscriber);
+                        tableBody.innerHTML += row;
+                    });
+                } else {
+                    tableBody.innerHTML = '<tr><td colspan="5" class="no-data">No newsletter subscribers found</td></tr>';
+                }
+
+                // Update summary stats
+                totalSubscribers.textContent = counts.total;
+                activeSubscribers.textContent = counts.active;
+                todaySubscribers.textContent = counts.today;
+
+                // Update main dashboard newsletter count
+                const newsletterStatCard = document.querySelector('.stat-card.newsletter .stat-value');
+                if (newsletterStatCard) {
+                    newsletterStatCard.textContent = counts.active;
+                }
+            });
+        }
+
+        // Create subscriber table row
+        function createSubscriberRow(id, subscriber) {
+            const statusClass = subscriber.status === 'unsubscribed' ? 'inactive' : 'active';
+            const statusText = subscriber.status || 'active';
+            
+            // Format date
+            let subscribedDate = 'N/A';
+            let subscribedTime = '';
+            
+            if (subscriber.subscribedAt) {
+                const date = new Date(subscriber.subscribedAt);
+                subscribedDate = date.toLocaleDateString();
+                subscribedTime = date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            }
+
+            // Short ID for display
+            const shortId = id.substring(0, 8);
+
+            return `
+                <tr data-subscriber-id="${id}">
+                    <td><span class="enquiry-id">${shortId}</span></td>
+                    <td>${subscriber.email || 'N/A'}</td>
+                    <td><span class="status-badge ${statusClass}">${statusText.toUpperCase()}</span></td>
+                    <td>${subscribedDate}<br><small style="color: #999;">${subscribedTime}</small></td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="action-icon-btn copy-email-btn" data-email="${subscriber.email}" title="Copy Email">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+                                </svg>
+                            </button>
+                            <button class="action-icon-btn ${statusClass === 'active' ? 'unsubscribe-btn' : 'resubscribe-btn'}" data-id="${id}" title="${statusClass === 'active' ? 'Unsubscribe' : 'Reactivate'}">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    ${statusClass === 'active' 
+                                        ? '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11H7v-2h10v2z"/>'
+                                        : '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>'
+                                    }
+                                </svg>
+                            </button>
+                            <button class="action-icon-btn delete-subscriber-btn" data-id="${id}" title="Delete">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        }
+
+        // Search newsletter subscribers
+        document.getElementById('newsletterSearch')?.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('#newsletterTableBody tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchTerm) ? '' : 'none';
+            });
+        });
+
+        // Filter newsletter subscribers by status
+        document.getElementById('newsletterFilter')?.addEventListener('change', function(e) {
+            const filterValue = e.target.value;
+            const rows = document.querySelectorAll('#newsletterTableBody tr');
+            
+            rows.forEach(row => {
+                if (filterValue === 'all') {
+                    row.style.display = '';
+                } else {
+                    const status = row.querySelector('.status-badge');
+                    if (status) {
+                        const statusText = status.textContent.toLowerCase();
+                        row.style.display = statusText.includes(filterValue) ? '' : 'none';
+                    }
+                }
+            });
+        });
+
+        // Copy email to clipboard
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.copy-email-btn')) {
+                const btn = e.target.closest('.copy-email-btn');
+                const email = btn.getAttribute('data-email');
+                
+                navigator.clipboard.writeText(email).then(() => {
+                    // Visual feedback
+                    const originalHTML = btn.innerHTML;
+                    btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>';
+                    btn.style.background = '#28a745';
+                    
+                    setTimeout(() => {
+                        btn.innerHTML = originalHTML;
+                        btn.style.background = '';
+                    }, 2000);
+                }).catch(() => {
+                    alert('Failed to copy email. Email: ' + email);
+                });
+            }
+        });
+
+        // Toggle subscription status
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.unsubscribe-btn') || e.target.closest('.resubscribe-btn')) {
+                const btn = e.target.closest('.unsubscribe-btn') || e.target.closest('.resubscribe-btn');
+                const subscriberId = btn.getAttribute('data-id');
+                const isUnsubscribe = btn.classList.contains('unsubscribe-btn');
+                const newStatus = isUnsubscribe ? 'unsubscribed' : 'active';
+                const action = isUnsubscribe ? 'unsubscribe' : 'reactivate';
+                
+                if (confirm(`Are you sure you want to ${action} this subscriber?`)) {
+                    const subscriberRef = ref(database, 'newsletter-subscribers/' + subscriberId + '/status');
+                    set(subscriberRef, newStatus).then(() => {
+                        alert(`Subscriber ${isUnsubscribe ? 'unsubscribed' : 'reactivated'} successfully!`);
+                    }).catch((error) => {
+                        alert('Error updating status: ' + error.message);
+                    });
+                }
+            }
+        });
+
+        // Delete newsletter subscriber
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.delete-subscriber-btn')) {
+                const btn = e.target.closest('.delete-subscriber-btn');
+                const subscriberId = btn.getAttribute('data-id');
+                
+                if (confirm('Are you sure you want to delete this subscriber? This action cannot be undone.')) {
+                    const subscriberRef = ref(database, 'newsletter-subscribers/' + subscriberId);
+                    remove(subscriberRef).then(() => {
+                        alert('Subscriber deleted successfully!');
+                    }).catch((error) => {
+                        alert('Error deleting subscriber: ' + error.message);
+                    });
+                }
+            }
+        });
+
+        // Make loadNewsletterSubscribers available globally
+        window.loadNewsletterSubscribers = loadNewsletterSubscribers;
+        
+        console.log('✅ Newsletter module functions loaded');
+        console.log('📧 loadNewsletterSubscribers function:', typeof window.loadNewsletterSubscribers);
+
         // Make loadBookings available globally
         window.loadBookings = loadBookings;
     </script>
@@ -2269,6 +2519,7 @@
                 const customersModule = document.getElementById('customersModule');
                 const bookingsModule = document.getElementById('bookingsModule');
                 const enquiriesModule = document.getElementById('enquiriesModule');
+                const newsletterModule = document.getElementById('newsletterModule');
                 
                 if (module === 'dashboard') {
                     dashboardStats.style.display = 'grid';
@@ -2278,6 +2529,7 @@
                     customersModule.style.display = 'none';
                     bookingsModule.style.display = 'none';
                     enquiriesModule.style.display = 'none';
+                    newsletterModule.style.display = 'none';
                 } else if (module === 'customers') {
                     dashboardStats.style.display = 'none';
                     quickActions.style.display = 'none';
@@ -2286,6 +2538,7 @@
                     customersModule.style.display = 'block';
                     bookingsModule.style.display = 'none';
                     enquiriesModule.style.display = 'none';
+                    newsletterModule.style.display = 'none';
                     // Load customers when module is opened
                     if (window.loadCustomers) {
                         window.loadCustomers();
@@ -2298,6 +2551,7 @@
                     customersModule.style.display = 'none';
                     bookingsModule.style.display = 'block';
                     enquiriesModule.style.display = 'none';
+                    newsletterModule.style.display = 'none';
                     // Load bookings when module is opened
                     if (window.loadBookings) {
                         window.loadBookings();
@@ -2311,6 +2565,7 @@
                     customersModule.style.display = 'none';
                     bookingsModule.style.display = 'none';
                     enquiriesModule.style.display = 'block';
+                    newsletterModule.style.display = 'none';
                     console.log('📊 Enquiries module display set to block');
                     // Load enquiries when module is opened
                     if (window.loadEnquiries) {
@@ -2318,6 +2573,24 @@
                         window.loadEnquiries();
                     } else {
                         console.error('❌ loadEnquiries function not found');
+                    }
+                } else if (module === 'newsletter') {
+                    console.log('📧 Switching to newsletter module');
+                    dashboardStats.style.display = 'none';
+                    quickActions.style.display = 'none';
+                    chartsContainer.style.display = 'none';
+                    otherContent.style.display = 'none';
+                    customersModule.style.display = 'none';
+                    bookingsModule.style.display = 'none';
+                    enquiriesModule.style.display = 'none';
+                    newsletterModule.style.display = 'block';
+                    console.log('📧 Newsletter module display set to block');
+                    // Load newsletter subscribers when module is opened
+                    if (window.loadNewsletterSubscribers) {
+                        console.log('📞 Calling loadNewsletterSubscribers function');
+                        window.loadNewsletterSubscribers();
+                    } else {
+                        console.error('❌ loadNewsletterSubscribers function not found');
                     }
                 } else {
                     dashboardStats.style.display = 'none';
@@ -2327,6 +2600,7 @@
                     customersModule.style.display = 'none';
                     bookingsModule.style.display = 'none';
                     enquiriesModule.style.display = 'none';
+                    newsletterModule.style.display = 'none';
                     otherContent.querySelector('p').textContent = `${title} content will be displayed here...`;
                 }
             });
