@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="format-detection" content="telephone=no">
+    <title>Mobile Responsiveness Test - Naya Hotel</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 0; 
+            padding: 20px;
+            background: #f0f0f0;
+        }
+        
+        .test-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .screen-info {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .responsive-test {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .test-box {
+            background: linear-gradient(45deg, #FF6B35, #C1121F);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .touch-target {
+            background: #4caf50;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px 5px;
+            min-height: 44px;
+            min-width: 44px;
+        }
+        
+        .touch-target:active {
+            background: #388e3c;
+            transform: scale(0.95);
+        }
+        
+        @media screen and (max-width: 768px) {
+            .mobile-only { display: block; }
+            .desktop-only { display: none; }
+        }
+        
+        @media screen and (min-width: 769px) {
+            .mobile-only { display: none; }
+            .desktop-only { display: block; }
+        }
+        
+        .mobile-only { display: none; }
+        .desktop-only { display: block; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>📱 Mobile Responsiveness Test</h1>
+        <p>This page helps you test if your mobile responsiveness is working properly.</p>
+    </div>
+
+    <div class="test-container screen-info">
+        <h2>📊 Screen Information</h2>
+        <div id="screenInfo">
+            <p><strong>Screen Width:</strong> <span id="screenWidth"></span>px</p>
+            <p><strong>Screen Height:</strong> <span id="screenHeight"></span>px</p>
+            <p><strong>Device Pixel Ratio:</strong> <span id="devicePixelRatio"></span></p>
+            <p><strong>Viewport Width:</strong> <span id="viewportWidth"></span>px</p>
+            <p><strong>User Agent:</strong> <span id="userAgent"></span></p>
+        </div>
+    </div>
+
+    <div class="test-container">
+        <h2>📱 Device Type Test</h2>
+        <div class="mobile-only">
+            <p style="color: green; font-weight: bold;">✅ Mobile CSS is working! You're seeing the mobile version.</p>
+        </div>
+        <div class="desktop-only">
+            <p style="color: red; font-weight: bold;">❌ Desktop CSS is active. Mobile styles may not be working properly.</p>
+        </div>
+    </div>
+
+    <div class="test-container">
+        <h2>🎯 Touch Target Test</h2>
+        <p>These buttons should be at least 44px × 44px for good mobile usability:</p>
+        <button class="touch-target" onclick="alert('Touch target working!')">Tap Me!</button>
+        <button class="touch-target" onclick="alert('Another tap!')">Tap Me Too!</button>
+        <button class="touch-target" onclick="alert('Good job!')">Great!</button>
+    </div>
+
+    <div class="test-container">
+        <h2>📏 Responsive Grid Test</h2>
+        <div class="responsive-test">
+            <div class="test-box">Box 1</div>
+            <div class="test-box">Box 2</div>
+            <div class="test-box">Box 3</div>
+            <div class="test-box">Box 4</div>
+        </div>
+    </div>
+
+    <div class="test-container">
+        <h2>🔧 Troubleshooting Tips</h2>
+        <ul>
+            <li><strong>Clear browser cache:</strong> Hard refresh (Ctrl+F5 or Cmd+Shift+R)</li>
+            <li><strong>Check viewport tag:</strong> Should include width=device-width, initial-scale=1.0</li>
+            <li><strong>Test on real device:</strong> Emulators don't always match real behavior</li>
+            <li><strong>Check CSS media queries:</strong> Use browser dev tools to test breakpoints</li>
+            <li><strong>Disable browser zoom:</strong> Reset zoom to 100%</li>
+        </ul>
+    </div>
+
+    <script>
+        function updateScreenInfo() {
+            document.getElementById('screenWidth').textContent = screen.width;
+            document.getElementById('screenHeight').textContent = screen.height;
+            document.getElementById('devicePixelRatio').textContent = window.devicePixelRatio || 1;
+            document.getElementById('viewportWidth').textContent = window.innerWidth;
+            document.getElementById('userAgent').textContent = navigator.userAgent.substring(0, 100) + '...';
+        }
+
+        updateScreenInfo();
+        
+        // Update on resize
+        window.addEventListener('resize', updateScreenInfo);
+        window.addEventListener('orientationchange', function() {
+            setTimeout(updateScreenInfo, 100);
+        });
+    </script>
+</body>
+</html>
